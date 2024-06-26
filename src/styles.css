@@ -1,0 +1,57 @@
+/* styles.css */
+body {
+    font-family: 'Times New Roman';
+    margin: 20px;
+    background-color:beige;
+}
+
+h1 {
+    color: #47c5aa;
+    text-align: center;
+}
+
+header {
+    background-color:#0f5747;
+    padding: 10px;
+}
+nav ul {
+    list-style-type: none; /* Remove bullets from the list */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left; /* Float the list items horizontally */
+    margin-right: 20px; /* Add margin to create space between menu items */
+}
+
+nav a {
+    color: white; /* Text color of the menu items */
+    text-decoration: none; /* Remove underlines from links */
+    font-weight: bold; /* Optionally make the text bold */
+    font-size: 18px; /* Set the font size of the menu items */
+}
+
+nav a:hover {
+    color: rgb(23, 226, 226); /* Change text color on hover */
+}
+
+h2 {
+    color: #0f5747;
+    font-size: 28px;
+    text-align: left;
+    margin-right: 500px;
+    margin-top: 40px;
+}
+img {
+    margin-left: 1400px;
+    margin-bottom: -345px;
+    width: 350px;
+}
+h4 {
+    font-size: 25px;
+    text-align: center;
+    margin-top: 150px;
+}
+
