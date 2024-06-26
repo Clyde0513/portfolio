@@ -1,4 +1,4 @@
-# For now, it's work in progress of my website
+# It's always work in progress of my website :)
 
 # To see my website, do required installations:
 install npm
