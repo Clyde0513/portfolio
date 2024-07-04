@@ -34,7 +34,7 @@
 <div class="container-two">
     <div class = 'about-me'>
         <h1 class = 'about-me-1'>About me</h1>
-        <p>Hello! My name is Clyde Villacrusis and I am majoring in Computer Science and minoring in Linguistics at UCLA as a 3rd year. 
+        <p>Hello! My name is Clyde Villacrusis and I am majoring in Computer Science and majoring in Linguistics & CS at UCLA as a 3rd year. 
         In my free time, I like to watch kdramas and play videogames. When given the opportunity,
         I tend to code stuff such as making my own personal website, e.g. to showcase 
          many of my projects that I have done in the past. In addition, I am apart of ACM AI in which we build AI models, 
