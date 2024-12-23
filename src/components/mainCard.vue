@@ -9,6 +9,7 @@
         <h3>Clyde Villacrusis</h3>
         <p>UCLA 3rd Year Computer Science Student, in addition to majoring in Linguistics and CS</p>
     </div>
+    
     <div class="social-links">
             <div class="link">
                 <a href = "https://github.com/Clyde0513">
@@ -23,10 +24,18 @@
                 <h2>Instagram</h2>
             </a>
            
-            </div><div class="link">
+            </div>
+            <div class="link">
             <a href = " https://www.linkedin.com/in/clydevillacrusis/">
                 <img src ="../assets/linkedln.png" alt = "" >     
                 <h2>Linkedln</h2>
+            </a>
+           </div>
+
+           <div class="link">
+            <a href = "/Clyde_Resume (4).pdf" download="Clyde's Resume.pdf">
+                <img src ="@/assets/resume.png" alt = "resume icon" >     
+                <h2>Resume</h2>
             </a>
            </div>
     </div>
@@ -56,6 +65,7 @@
         At the moment, I am a part of KAWAN (Filipino-Catholic Club) as an Associate Executive Director and PIES (Pilipino in Engineering and Sciences) here at UCLA. Being a part of these clubs have helped me come out
         of my shell and socialize/network with other like-minded and diverse peers. They've helped me grow as a person and are very welcoming in new and old peers! 
         </p>
+        
     </div>
     <div class="techonology-section">
         <h1>Techonologies studied</h1>
@@ -92,35 +102,69 @@ export default{
     .wrapper{
         display: flex;
         justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        background-color: #163f4b;
     }
     img{
         height: 10px;
     }
     .main-container{
-        display: flex;
-        flex-direction: row;
-        background-color: lightgray;
-        border-radius: 25px;
-        width: 60%;
-        background-color: #0c406b;
-        box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+        max-width: 800px;
+        width: 100%;
+        background: rgb(42, 157, 161);
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
     }
     .container-one{
         background-color: lightskyblue;
         padding: 1%;
-        width: 30%;
-        border-radius: 25px;
+        margin-left: 14.5%;
+        width: 70%;
+        border-radius: 40px;
         box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
     }
-    .profile img{
-        height: 5rem;
-        border-radius: 50%;
-        border-radius: 25px;
+    .profile {
+  text-align: center;
+  margin-bottom: 2rem;
     }
+
+    .profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #3498db;
+    }
+
+    .profile h3 {
+    margin-top: -1rem;
+    font-size: 2.1rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    }       
+
+    .profile p {
+    color: #09328f;
+    line-height: 1.6;
+    font-size: 1.2rem;
+    }
+
+    .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    }
+
     .container-two{
-        background-color: rgb(180, 216, 250);
-        width: 70%;
-        margin: 2.5%;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: rgba(11, 8, 202, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
     }
     .link a{
         text-decoration: none;
@@ -128,17 +172,28 @@ export default{
         font-size: 10px;  
     }
     .link img{
-        height: 2rem;
+        width: 24px;
+        height: 24px;
     }
 
     .about-me-1{
         text-align: center;
         padding: 10px;
     }
-    .about-me{
-        text-align: left;
-        padding: 10px;
+    .about-me h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        text-align: center;
     }
+
+    .about-me p {
+        color: rgb(38, 26, 26);
+        line-height: 1.6;
+        font-size: 1.1rem;
+        text-align: justify;
+        padding: 0 1rem;
+        }
     .logos img{
         height: 2.5rem;
     }
@@ -164,9 +219,21 @@ export default{
         align-items: center;
     }
 
+    .link a:hover {
+    background-color: #054163;
+    transform: translateY(-2px);
+    }
+
+ 
+
     @media only screen and (max-width: 950px){
         .main-container{
             width: 95%;
         }
+
+        .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
     }
 </style>
