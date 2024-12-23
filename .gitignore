@@ -8,6 +8,8 @@ project.json
 .vercel
 .env.local
 .env.*.local
+.env
+.env.production
 
 # Log files
 npm-debug.log*
