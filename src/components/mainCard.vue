@@ -33,7 +33,7 @@
            </div>
 
            <div class="link">
-            <a href = " /Clyde_Resume(4).pdf" download="Resume.pdf">
+            <a href = "https://clydev.vercel.app/Clyde_Resume(4).pdf" download="Resume.pdf">
                 <img src ="@/assets/resume.png" alt = "resume icon" >     
                 <h2>Resume</h2>
             </a>
