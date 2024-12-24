@@ -21,44 +21,6 @@ Visit my portfolio at [clydev.vercel.app](https://clydev.vercel.app/)
 - Social media integration
 
 ## 🏗️ Project Structure
-Collecting workspace information
-
-Filtering to most relevant information
-
-Still building the workspace index, response may be less accurate.
-
-I'll help you create a better 
-
-README.md
-
- for your portfolio project. Here's a clearer and more professional version:
-
-```markdown
-# Personal Portfolio Website
-
-A modern and responsive portfolio website built with Vue.js, showcasing my projects and professional experience.
-
-## 🌐 Live Demo
-
-Visit my portfolio at [clydev.vercel.app](https://clydev.vercel.app/)
-
-## 🛠️ Built With
-
-- Vue.js 3
-- Vercel Blob Storage
-- CSS3
-- Vite
-
-## ✨ Features
-
-- Responsive design
-- Project showcase with detailed descriptions
-- Interactive UI elements
-- Social media integration
-- Downloadable resume
-- Research projects section
-
-## 🏗️ Project Structure
 '''
 src/
 ├── components/
@@ -69,7 +31,7 @@ src/
 ├── utils/
 │   └──blob.js # File handling utilities
 └── App.vue # Root component
-''''
+'''
 
 ## 🚀 Getting Started
 
