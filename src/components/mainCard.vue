@@ -138,7 +138,7 @@ const downloadResume = async () => {
     .main-container{
         max-width: 800px;
         width: 100%;
-        background: rgb(42, 157, 161);
+        background: rgb(0, 119, 171);
         border-radius: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 2rem;
@@ -149,7 +149,7 @@ const downloadResume = async () => {
         margin-left: 14.5%;
         width: 70%;
         border-radius: 40px;
-        box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     /* .about-me:hover {
@@ -197,7 +197,8 @@ const downloadResume = async () => {
     .container-two{
         margin-top: 2rem;
         padding: 1.5rem;
-        background: rgba(11, 8, 202, 0.1);
+        background: rgba(21, 191, 229, 0.1);
+        background-color: lightskyblue;
         border-radius: 15px;
         backdrop-filter: blur(10px);
     }
