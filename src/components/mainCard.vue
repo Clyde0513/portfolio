@@ -78,10 +78,10 @@ const downloadResume = async () => {
         such as using Pytorch and CNNs.😊
         <br/>
         <br/>
-        I am currently interning at UCLA Health to develop an AI application that translates unorganized
+        <b>I am currently interning at UCLA Health to develop an AI application that translates unorganized
         blood pressure data into a cleaned and organized format. Currently, the tools I am using are OCR tools,
         smart on Fire, and ChatGPT enterprise models. When the AI application is complete, I hope to see a growth
-        in the number of patients that are able to get their blood pressure data organized and cleaned.
+        in the number of patients that are able to get their blood pressure data organized and cleaned.</b>
         <br/>
         <br/>
         I liked programming because of how cool it is that every successful code I ran, it is extremely satisfying. I started to learn programming and getting into it when I took
@@ -219,6 +219,7 @@ const downloadResume = async () => {
         font-size: 1.1rem;
         text-align: justify;
         padding: 0 1rem;
+        
         }
     .logos img{
         height: 2.5rem;
