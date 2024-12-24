@@ -204,6 +204,7 @@ const downloadResume = async () => {
     .about-me-1{
         text-align: center;
         padding: 10px;
+        font-weight: bold;
     }
     .about-me h2 {
         color: white;

@@ -9,7 +9,11 @@
 
         <p class = 'about-me'>{{ projectData.ProjectsArray[index].About }}</p>
         <p class = 'about-me'>{{ projectData.ProjectsArray[index].About1 }}</p>
-        <img :src = "projectData.ProjectsArray[index].Image2" alt = "">     
+        <img :src = "projectData.ProjectsArray[index].Image2" alt = "">   
+        <!-- add a space between the images   -->
+        
+        <img :src = "projectData.ProjectsArray[index].Image3" alt = "">
+        <img :src = "projectData.ProjectsArray[index].Image4" alt = "">
         <div class="links">
             <a :href = "projectData.ProjectsArray[index].Link" target = "_blank"><img src = "../assets/github.png" alt = "Github Logo"> </a> <!-- 3.3.13 Github Logo -->
         </div>
