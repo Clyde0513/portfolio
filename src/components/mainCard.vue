@@ -204,13 +204,15 @@ const downloadResume = async () => {
     .about-me-1{
         text-align: center;
         padding: 10px;
-        font-weight: bold;
+        font-family: 'sans-serif';
+        
     }
     .about-me h2 {
         color: white;
         font-size: 1.8rem;
         margin-bottom: 1rem;
         text-align: center;
+        
     }
 
     .about-me p {
@@ -219,7 +221,7 @@ const downloadResume = async () => {
         font-size: 1.1rem;
         text-align: justify;
         padding: 0 1rem;
-        
+        font-family: sans-serif;
         }
     .logos img{
         height: 2.5rem;
