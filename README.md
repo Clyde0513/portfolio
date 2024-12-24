@@ -59,8 +59,7 @@ Visit my portfolio at [clydev.vercel.app](https://clydev.vercel.app/)
 - Research projects section
 
 ## 🏗️ Project Structure
-# Project showcase component
-```
+'''
 src/
 ├── components/
 │   ├── mainCard.vue # Main profile component
@@ -70,7 +69,7 @@ src/
 ├── utils/
 │   └──blob.js # File handling utilities
 └── App.vue # Root component
-```
+''''
 
 ## 🚀 Getting Started
 
