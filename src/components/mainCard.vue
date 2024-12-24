@@ -151,10 +151,19 @@ const downloadResume = async () => {
         border-radius: 40px;
         box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
     }
+
+    /* .about-me:hover {
+        transform: scale(1.05);
+    } */
+
+    .container-one:hover {
+        transform: scale(1.05);
+    }
     .profile {
   text-align: center;
   margin-bottom: 2rem;
     }
+
 
     .profile img {
     width: 150px;
@@ -178,6 +187,7 @@ const downloadResume = async () => {
     font-size: 1.2rem;
     }
 
+
     .social-links {
     display: flex;
     justify-content: center;
@@ -191,6 +201,11 @@ const downloadResume = async () => {
         border-radius: 15px;
         backdrop-filter: blur(10px);
     }
+
+    .container-two:hover {
+        transform: scale(1.05);
+    }
+
     .link a{
         text-decoration: none;
         color: rgb(70, 31, 212);
