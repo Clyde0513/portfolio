@@ -1,13 +1,13 @@
-// vite.config.js
-import { defineConfig } from 'vite';
-import Vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-
-export default defineConfig({
-  plugins: [Vue()],
-  publicPath: process.env.BASE_URL
-});
-
-module.exports = {
-  publicPath: process.env.BASE_URL
-}
+export default defineConfig(() => {
+  return {
+    plugins: [vue()],
+    envPrefix: 'VITE_',
+    define: {
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false
+    }
+  }
+})

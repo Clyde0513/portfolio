@@ -40,7 +40,7 @@ import jsonData from "/projects.json"
     flex-wrap: wrap;
 }
 .project-card{
-    margin: 80px;
+    margin: 100px;
     padding: 10px;
     flex-wrap: 0 0 40%;
     background-color: rgb(146, 203, 216);

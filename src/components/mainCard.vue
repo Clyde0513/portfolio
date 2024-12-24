@@ -1,3 +1,31 @@
+<script setup>
+import { ref } from 'vue';
+import { config } from '../utils/envUtility';
+
+const error = ref(null);
+const downloadResume = async () => {
+  try {
+    const response = await fetch(config.resumeUrl(), {
+      headers: {
+        'Authorization': `Bearer ${config.blobToken()}`
+      }
+    });    
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Clyde_Resume.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    error.value = err.message;
+    console.error('Download failed:', error);
+  }
+};
+</script>
+
 <template>
     
 <div class="wrapper">
@@ -33,9 +61,9 @@
            </div>
 
            <div class="link">
-            <a href = "https://clydev.vercel.app/Clyde_Resume(4).pdf" download="Resume.pdf">
-                <img src ="@/assets/resume.png" alt = "resume icon" >     
-                <h2>Resume</h2>
+            <a @click.prevent="downloadResume" href="#">
+              <img src="../assets/resume.png" alt="PDF">
+              <h2>Resume</h2>
             </a>
            </div>
     </div>
@@ -50,16 +78,18 @@
         such as using Pytorch and CNNs.😊
         <br/>
         <br/>
+        I am currently interning at UCLA Health to develop an AI application that translates unorganized
+        blood pressure data into a cleaned and organized format. Currently, the tools I am using are OCR tools,
+        smart on Fire, and ChatGPT enterprise models. When the AI application is complete, I hope to see a growth
+        in the number of patients that are able to get their blood pressure data organized and cleaned.
+        <br/>
+        <br/>
         I liked programming because of how cool it is that every successful code I ran, it is extremely satisfying. I started to learn programming and getting into it when I took
         AP Computer Science A during my senior year of highschool. The first language I learned was Java and the language I first struggled because everything was new to me:
         from basic variable syntax to the end of the AP unit: Recursion. Since then, I interned at a nonprofit company called Curls&Careers where I enhanced my coding abilities
         regarding CSS, JS, and HTML. My primary goal was to revamp the website so that it looks clean and readable for HS students finding mentors (mentorship program). It was a fun
         internship that lasted for about 5 months.
-        <br/>
-        <br/>
-        I also interned at a non-CS company called Club Stride where I had to work in groups to make presentations, pitch-decks, and 
-        elevator pitches to present to the team and supervisors regarding how we can improve the transportation livelihood in Vallejo (my hometown in California). I learned and
-        improved my soft and hard skills, such as communicating effectively with my peers and utilizing Notion to create slides and manage our schedule for tasks' due dates.
+     
         <br/>
         <br/>
         At the moment, I am a part of KAWAN (Filipino-Catholic Club) as an Associate Executive Director and PIES (Pilipino in Engineering and Sciences) here at UCLA. Being a part of these clubs have helped me come out
@@ -90,12 +120,7 @@
 </div>
 </template>
 
-<script>
 
-export default{
-   
-}
-</script>
 
 <style scoped>
 
