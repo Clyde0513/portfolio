@@ -21,17 +21,17 @@ Visit my portfolio at [clydev.vercel.app](https://clydev.vercel.app/)
 - Social media integration
 
 ## 🏗️ Project Structure
-'''
-src/
-├── components/
-│   ├── mainCard.vue # Main profile component
-│   ├── projectCard.vue
-│   └── researchCard.vue
-├── assets/ # Images and static resources
-├── utils/
-│   └──blob.js # File handling utilities
-└── App.vue # Root component
-'''
+```
+- src/
+- ├── components/
+- │   ├── mainCard.vue # Main profile component
+- │   ├── projectCard.vue
+- │   └── researchCard.vue
+- ├── assets/ # Images and static resources
+- ├── utils/
+- │   └──blob.js # File handling utilities
+- └── App.vue # Root component
+```
 
 ## 🚀 Getting Started
 
@@ -58,7 +58,7 @@ Set-ExecutionPolicy Restricted -Scope CurrentUser
 
 3. Run development server
 ```bash
-npm run dev
+npm run serve
 ```
 
 ## 👤 About Me
