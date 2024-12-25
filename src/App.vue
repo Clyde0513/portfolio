@@ -33,6 +33,6 @@ body{
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  background-color: rgb(104, 150, 179);
+  background-color: rgb(39, 112, 158);
 }
 </style>
