@@ -30,18 +30,18 @@ export default {
 <style scoped>
 .main-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
-    gap: 20px; /* Add gap between grid items */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 45px; /* Add gap between grid items */
     justify-items: center; /* Center items horizontally */
     align-items: start; /* Align items at the top */
-    padding-left: 20px; /* Add padding to the left side */
+    padding: 20px; /* Add padding around the container */
 }
 .project-card {
-    padding: 10px;
+    padding: 20px;
     background-color: rgb(115, 201, 220);
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     min-height: 450px; /* Set a minimum height */
     display: flex;
     flex-direction: column;
@@ -53,10 +53,12 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .project-card img {
-    height: 11rem;
-    width: 80%;
+    height: auto;
+    width: 100%;
+    max-height: 200px; /* Set a maximum height */
     border-radius: 15px;
-    margin: 10px auto;
+    margin: 10px 0;
+    object-fit: cover; /* Ensure images cover the area */
 }
 
 .links {
@@ -67,7 +69,7 @@ export default {
     margin-top: 10px;
 }
 .links img {
-    height: 1.2rem;
+    height: 1.5rem;
     margin: 5px;
     transition: transform 0.3s;
 }
@@ -75,12 +77,15 @@ export default {
     transform: scale(1.2);
 }
 .about-me {
-    width: 97%;
+    width: 100%;
     margin-top: 10px;
     font-size: 1rem;
     color: #333;
     overflow: hidden; /* Ensure text does not overflow */
     text-overflow: ellipsis;
     white-space: normal; /* Allow text to wrap */
+    line-height: 1.5; /* Improve readability */
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:rgb(3, 24, 29)
 }
 </style>
