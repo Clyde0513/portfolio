@@ -2,19 +2,19 @@
     <div>
         <button @click="$router.push('/')" class="back-button">Back</button>
         <div class="main-container">
-            <div class="project-card" v-for="(items) in projectData.ProjectsArray" v-bind:key="items">
-                <h2 @click="toggleDropdown(items)" class="dropdown-title">{{ items.Title }}</h2>
+            <div class="project-card" v-for="(item, index) in projectData.ProjectsArray" v-bind:key="index">
+                <h2 @click="toggleDropdown(item)" class="dropdown-title">{{ item.Title }}</h2>
                 <transition name="fade">
-                    <div :class="['dropdown-content', { 'visible': items.showDropdown }]">
-                        <img :src="items.Image" alt="">
-                        <img :src="items.Image1" alt="">
-                        <p class='about-me'>{{ items.About }}</p>
-                        <p class='about-me'>{{ items.About1 }}</p>
-                        <img v-if="items.Image2" :src="items.Image2" alt="">
-                        <img v-if="items.Image3" :src="items.Image3" alt="">
-                        <img v-if="items.Image4" :src="items.Image4" alt="">
+                    <div :class="['dropdown-content', { 'visible': item.showDropdown }]">
+                        <img :src="item.Image" alt="">
+                        <img :src="item.Image1" alt="">
+                        <p class='about-me'>{{ item.About }}</p>
+                        <p class='about-me'>{{ item.About1 }}</p>
+                        <img v-if="item.Image2" :src="item.Image2" alt="">
+                        <img v-if="item.Image3" :src="item.Image3" alt="">
+                        <img v-if="item.Image4" :src="item.Image4" alt="">
                         <div class="links">
-                            <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+                            <a :href="item.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
                         </div>
                     </div>
                 </transition>
@@ -72,8 +72,8 @@ export default {
     min-height: 100px; /* Set a minimum height */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden; /* Ensure content does not overflow */
+    justify-content: flex-start; /* Changed from space-between */
+    /* removed overflow: hidden */
 }
 .project-card:hover {
     transform: scale(1.0147);
@@ -132,13 +132,17 @@ export default {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    transform-origin: top;
+    transform: scaleY(0);
 }
 
 .dropdown-content.visible {
-    max-height: 1000px; /* Arbitrary large value to ensure full height */
-    padding: 10px; /* Add padding when visible */
+    max-height: 5000px; /* Increased max-height */
+    opacity: 1;
+    padding: 10px;
+    transform: scaleY(1);
 }
 
 .fade-enter-active, .fade-leave-active {
