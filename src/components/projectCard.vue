@@ -3,16 +3,18 @@
         <button @click="$router.push('/')" class="back-button">Back</button>
         <div class="main-container">
             <div class="project-card" v-for="(items) in projectData.ProjectsArray" v-bind:key="items">
-                <h2>{{ items.Title }}</h2>
-                <img :src="items.Image" alt="">
-                <img :src="items.Image1" alt="">
-                <p class='about-me'>{{ items.About }}</p>
-                <p class='about-me'>{{ items.About1 }}</p>
-                <img v-if="items.Image2" :src="items.Image2" alt="">
-                <img v-if="items.Image3" :src="items.Image3" alt="">
-                <img v-if="items.Image4" :src="items.Image4" alt="">
-                <div class="links">
-                    <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+                <h2 @click="toggleDropdown(items)" class="dropdown-title">{{ items.Title }}</h2>
+                <div v-if="items.showDropdown" class="dropdown-content">
+                    <img :src="items.Image" alt="">
+                    <img :src="items.Image1" alt="">
+                    <p class='about-me'>{{ items.About }}</p>
+                    <p class='about-me'>{{ items.About1 }}</p>
+                    <img v-if="items.Image2" :src="items.Image2" alt="">
+                    <img v-if="items.Image3" :src="items.Image3" alt="">
+                    <img v-if="items.Image4" :src="items.Image4" alt="">
+                    <div class="links">
+                        <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,6 +27,11 @@ export default {
     data() {
         return {
             projectData: jsonData
+        }
+    },
+    methods: {
+        toggleDropdown(item) {
+            item.showDropdown = !item.showDropdown;
         }
     }
 }
@@ -60,7 +67,7 @@ export default {
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.3s, box-shadow 0.3s;
-    min-height: 450px; /* Set a minimum height */
+    min-height: 100px; /* Set a minimum height */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -105,5 +112,22 @@ export default {
     line-height: 1.5; /* Improve readability */
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:rgb(3, 24, 29)
+}
+.dropdown-title {
+    cursor: pointer;
+    color: #3498db;
+    transition: color 0.3s;
+}
+
+.dropdown-title:hover {
+    color: #2980b9;
+}
+
+.dropdown-content {
+    background-color: rgb(115, 201, 220); /* Match the project card background color */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
 }
 </style>
