@@ -31,9 +31,10 @@ export default {
 </script>
 
 <style>
-/* Add global styles for the entire app if needed */
+/* Add global styles for the entire app */
 body {
   margin: 0;
+  background-color: rgb(39, 112, 158); /* Change the background color here */
 }
 #app {
   font-family: 'Times New Roman', Times, serif;
@@ -42,6 +43,5 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  background-color: rgb(39, 112, 158);
 }
 </style>

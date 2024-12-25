@@ -4,7 +4,7 @@
         <div class="main-container">
             <div class="project-card" v-for="(items) in projectData.ProjectsArray" v-bind:key="items">
                 <h2 @click="toggleDropdown(items)" class="dropdown-title">{{ items.Title }}</h2>
-                <div v-if="items.showDropdown" class="dropdown-content">
+                <div :class="['dropdown-content', { 'visible': items.showDropdown }]">
                     <img :src="items.Image" alt="">
                     <img :src="items.Image1" alt="">
                     <p class='about-me'>{{ items.About }}</p>
@@ -40,7 +40,7 @@ export default {
 <style scoped>
 .back-button {
     background-color: #3498db;
-    color: white;
+    color: rgb(8, 69, 255);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -129,5 +129,10 @@ export default {
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
+    display: none; /* Hide content by default */
+}
+
+.dropdown-content.visible {
+    display: block; /* Show content when visible */
 }
 </style>
