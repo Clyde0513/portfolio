@@ -49,13 +49,13 @@ export default {
     overflow: hidden; /* Ensure content does not overflow */
 }
 .project-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.0147);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .project-card img {
     height: auto;
     width: 100%;
-    max-height: 200px; /* Set a maximum height */
+    max-height: 800px; /* Set a maximum height */
     border-radius: 15px;
     margin: 10px 0;
     object-fit: cover; /* Ensure images cover the area */
