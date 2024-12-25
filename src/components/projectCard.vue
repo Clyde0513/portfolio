@@ -14,52 +14,64 @@
             </div>
         </div>
     </div>
-    </template>
-    
-    <script>
-    import jsonData from "/projects.json"
-    export default {
-        data() {
-            return {
-                projectData: jsonData
-            }
+</template>
+
+<script>
+import jsonData from "/projects.json"
+export default {
+    data() {
+        return {
+            projectData: jsonData
         }
     }
-    </script>
-    
-    <style scoped>
-    .main-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .project-card {
-        margin: 20px;
-        padding: 10px;
-        flex: 0 0 28%;
-        background-color: rgb(115, 201, 220);
-        border-radius: 25px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        transition: transform 0.3s;
-    }
-    .project-card:hover {
-        transform: scale(1.05);
-    }
-    .project-card img {
-        height: 11rem;
-    }
-    .links {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-    }
-    .links img {
-        height: 1.2rem;
-        margin: 5px;
-    }
-    .about-me {
-        width: 97%;
-    }
-    </style>
+}
+</script>
+
+<style scoped>
+.main-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.project-card {
+    margin: 20px;
+    padding: 10px;
+    flex: 0 0 28%;
+    background-color: rgb(115, 201, 220);
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.3s;
+}
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.project-card img {
+    height: 11rem;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.links img {
+    height: 1.2rem;
+    margin: 5px;
+    transition: transform 0.3s;
+}
+.links img:hover {
+    transform: scale(1.2);
+}
+.about-me {
+    width: 97%;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+</style>
