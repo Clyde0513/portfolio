@@ -111,7 +111,7 @@ const downloadResume = async () => {
             <img src = "../assets/java.png" alt = "Java Language Logo">
         </div>
         <!-- <div class="button-container">
-            <router-link to="/technologies" class="tech-button">Learn More</router-link>
+            <router-link to="/internships" class="tech-button">Learn More</router-link>
         </div> -->
     </div>
     <div class="button-container">
@@ -152,10 +152,11 @@ const downloadResume = async () => {
     .container-one{
         background-color: lightskyblue;
         padding: 1%;
-        margin-left: 14.5%;
-        width: 70%;
+        margin-left: 1.5%;
+        width: 95%;
         border-radius: 40px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
     }
 
     /* .about-me:hover {

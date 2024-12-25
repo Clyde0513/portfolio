@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'TechnologiesPage'
+  name: 'InternshipsPage'
 }
 </script>
 

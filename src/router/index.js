@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import mainCard from '../components/mainCard.vue';
 import projectCard from '../components/projectCard.vue';
-import Technologies from '../components/Technologies.vue';
+import Technologies from '../components/internships.vue';
 
 const routes = [
   { path: '/', component: mainCard },
