@@ -6,13 +6,15 @@
     <div class="research-container">
       <h1>Research Papers</h1>
       <div class="paper-section">
+        
         <div class="dropdown-header" @click="togglePaper">
           <h2>[Morphology] Taglish: A Mixed-Code Language of English and Tagalog</h2>
           <span class="arrow">{{ isOpen ? '▼' : '▶' }}</span>
         </div>
-        <div class="paper-content" v-show="isOpen">
+        <transition name="slide">
+          <div class="paper-content" v-if="isOpen">
         
-          <h3>Introduction</h3>
+          <h3>Overview</h3>
           <p> Taglish: a mixture of two languages consisting of English and Tagalog, is a convenient way of
           speaking both languages, especially in Luzon. It was first introduced in the early 20th century when
           Americans brought English into Metro Manila, bringing Filipinos together to speak such a mixed
@@ -37,6 +39,29 @@
           
           <!-- Add more sections as needed -->
         </div>
+        </transition>
+      </div>
+
+      <!-- Second Paper Section -->
+      <div class="paper-section">
+        <div class="dropdown-header" @click="togglePaper2">
+          <h2>Attack to LLM-based Web Agent to cause PII Leakage/Phishing/Malicious Behavior </h2>
+          <span class="arrow">{{ isOpen2 ? '▼' : '▶' }}</span>
+        </div>
+        <transition name="slide">
+          <div class="paper-content" v-if="isOpen2">
+            <h3>Abstract</h3>
+            <p>In general, web based agents complete several tasks for you on real websites, significantly increasing human productivity. Unfortunately, web based agents can be susceptible to malicious attacks that reveal the user’s personally identifiable information (PII). In this report, we aim to explore how it is possible to make an LLM-based web agent leak a user’s private information. Attacks to LLM-based web agents are done by modifying the source code of a website that the web agent acts on. Using SeeAct with Gemini 1.5 flash as our testing framework, we demonstrated how attackers can establish hidden forms that mirror legitimate input fields, causing web agents to inadvertently recreate sensitive information into concealed fields. 
+              </p>
+              <br/>
+              <p>
+              In addition, we also used popup and adversarial attacks so that we can perform our attacks. Our preliminary results show particular success with login credential and shipping information forms. Shipping information forms is where the agent consistently populates the hidden forms, while login credential forms showed mixed results, suggesting potential built-in protective behaviors in some scenarios. Currently, the limitations of defense mechanisms, i.e., non-visible element detection and keyword filtering, fail to protect against sophisticated injection attacks. Thus, our findings highlight the need for more robust security measures against web agent attacks.</p>
+            
+            <a href="https://github.com/Clyde0513/Attack-To-WebAgents/blob/main/Attack%20to%20LLM-based%20Web%20Agent%20to%20cause%20PII%20Leakage_Phishing_Malicious%20Behavior.docx.pdf" target="_blank" class="github-link">
+              <img src="../assets/github.png" alt="GitHub Logo" class="github-logo">
+            </a>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -47,7 +72,8 @@ export default {
   name: 'ResearchPage',
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      isOpen2: false
     }
   },
   methods: {
@@ -56,6 +82,9 @@ export default {
     },
     goBack() {
       this.$router.go(-1)
+    },
+    togglePaper2() {
+      this.isOpen2 = !this.isOpen2
     }
   }
 }
@@ -140,5 +169,23 @@ h1, h2, h3 {
 
 .github-link:hover .github-logo {
   transform: scale(1.1);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  transform: translateY(0);
+  opacity: 1;
 }
 </style>
