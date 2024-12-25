@@ -36,6 +36,9 @@ const downloadResume = async () => {
         <img src="../assets/me.png" alt="my photo">
         <h3>Clyde Villacrusis</h3>
         <p>UCLA 3rd Year Computer Science Student, in addition to majoring in Linguistics and CS</p>
+        <div class="button-container">
+            <router-link to="/projects" class="tech-button">View Projects</router-link>
+        </div>
     </div>
     
     <div class="social-links">
@@ -107,6 +110,9 @@ const downloadResume = async () => {
             <img src = "../assets/Vue.png" alt = "Vue Language Logo">
             <img src = "../assets/java.png" alt = "Java Language Logo">
         </div>
+        <!-- <div class="button-container">
+            <router-link to="/technologies" class="tech-button">Learn More</router-link>
+        </div> -->
     </div>
     <div class="button-container">
 
@@ -203,9 +209,7 @@ const downloadResume = async () => {
         backdrop-filter: blur(10px);
     }
 
-    .container-two:hover {
-        transform: scale(1.05);
-    }
+    
 
     .link a{
         text-decoration: none;
@@ -262,6 +266,7 @@ const downloadResume = async () => {
         flex: row;
         justify-content: center;
         align-items: center;
+        margin-top: -1rem;
     }
 
     .link a:hover {
@@ -269,7 +274,20 @@ const downloadResume = async () => {
     transform: translateY(-2px);
     }
 
- 
+    .tech-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .tech-button:hover {
+        background-color: #2980b9;
+    }
 
     @media only screen and (max-width: 950px){
         .main-container{

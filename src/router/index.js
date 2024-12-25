@@ -1,27 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
-// import mainCard from '../components/mainCard.vue'
-import research from '../components/researchCard.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import mainCard from '../components/mainCard.vue';
+import projectCard from '../components/projectCard.vue';
+import Technologies from '../components/Technologies.vue';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'mainCard',
-  //   component: mainCard
-  // },
-  {
-    path: '/',
-    redirect: '/mainPage',
-  },
-  {
-    path: '/research',
-    name: 'Research',
-    component: research
-  }
-]
+  { path: '/', component: mainCard },
+  { path: '/projects', component: projectCard },
+  { path: '/internships', component: Technologies }
+];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  history: createWebHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0 };
+  }
+});
 
-export default router
+export default router;

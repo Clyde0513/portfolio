@@ -1,32 +1,41 @@
 <!-- App.vue -->
 <template>
-
-  <mainCard/>
-  <projectCard/>
-   
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
-import mainCard from './components/mainCard.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import mainCard from './components/mainCard.vue';
 import projectCard from './components/projectCard.vue';
-// import researchCard from './components/researchCard.vue';
+import Technologies from './components/Technologies.vue';
+
+const routes = [
+  { path: '/', component: mainCard },
+  { path: '/projects', component: projectCard },
+  { path: '/internships', component: Technologies }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 export default {
   name: 'App',
-  components: {
-    mainCard,
-    projectCard,
-    // researchCard
+  setup() {
+    return { router };
   }
 }
-
 </script>
-<style >
+
+<style>
 /* Add global styles for the entire app if needed */
-body{
+body {
   margin: 0;
 }
-#app{
+#app {
   font-family: 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
