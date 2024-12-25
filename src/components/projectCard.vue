@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="back-button" @click="$router.push('/')">← Go Back</div>
+        <div class="reminder-button">Reminder: Projects are clickable!</div>
         <div class="main-container">
             <div class="project-card" v-for="(item, index) in projectData.ProjectsArray" v-bind:key="index">
                 <h2 @click="toggleDropdown(item)" class="dropdown-title">{{ item.Title }}</h2>
@@ -54,6 +55,21 @@ export default {
 }
 
 .back-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.reminder-button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: rgb(146, 169, 203);
+    z-index: 100;
+}
+
+.reminder-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
