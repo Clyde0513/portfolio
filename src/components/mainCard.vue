@@ -37,7 +37,10 @@ const downloadResume = async () => {
         <h3>Clyde Villacrusis</h3>
         <p>UCLA 3rd Year Computer Science Student, in addition to majoring in Linguistics and CS</p>
         <div class="button-container">
-            <router-link to="/projects" class="tech-button">View Projects</router-link>
+            <router-link to="/projects" class="tech-button">Projects</router-link>
+        </div>
+        <div class="button-container">
+            <router-link to="/research" class="tech-button">Research</router-link>
         </div>
     </div>
     
@@ -110,9 +113,7 @@ const downloadResume = async () => {
             <img src = "../assets/Vue.png" alt = "Vue Language Logo">
             <img src = "../assets/java.png" alt = "Java Language Logo">
         </div>
-        <!-- <div class="button-container">
-            <router-link to="/internships" class="tech-button">Learn More</router-link>
-        </div> -->
+        
     </div>
     <div class="button-container">
 

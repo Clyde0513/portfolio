@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="$router.push('/')" class="back-button">Back</button>
+        <div class="back-button" @click="$router.push('/')">← Go Back</div>
         <div class="main-container">
             <div class="project-card" v-for="(item, index) in projectData.ProjectsArray" v-bind:key="index">
                 <h2 @click="toggleDropdown(item)" class="dropdown-title">{{ item.Title }}</h2>
@@ -41,18 +41,20 @@ export default {
 
 <style scoped>
 .back-button {
-    background-color: #3498db;
-    color: rgb(8, 69, 255);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 20px;
+    color: rgb(146, 169, 203);
+    z-index: 100;
 }
 
 .back-button:hover {
-    background-color: #2980b9;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .main-container {
@@ -62,6 +64,7 @@ export default {
     justify-items: center; /* Center items horizontally */
     align-items: start; /* Align items at the top */
     padding: 20px; /* Add padding around the container */
+    margin-top: 80px; /* Add top margin to prevent overlap with back button */
 }
 .project-card {
     padding: 20px;
