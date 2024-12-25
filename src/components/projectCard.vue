@@ -4,18 +4,20 @@
         <div class="main-container">
             <div class="project-card" v-for="(items) in projectData.ProjectsArray" v-bind:key="items">
                 <h2 @click="toggleDropdown(items)" class="dropdown-title">{{ items.Title }}</h2>
-                <div :class="['dropdown-content', { 'visible': items.showDropdown }]">
-                    <img :src="items.Image" alt="">
-                    <img :src="items.Image1" alt="">
-                    <p class='about-me'>{{ items.About }}</p>
-                    <p class='about-me'>{{ items.About1 }}</p>
-                    <img v-if="items.Image2" :src="items.Image2" alt="">
-                    <img v-if="items.Image3" :src="items.Image3" alt="">
-                    <img v-if="items.Image4" :src="items.Image4" alt="">
-                    <div class="links">
-                        <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+                <transition name="fade">
+                    <div :class="['dropdown-content', { 'visible': items.showDropdown }]">
+                        <img :src="items.Image" alt="">
+                        <img :src="items.Image1" alt="">
+                        <p class='about-me'>{{ items.About }}</p>
+                        <p class='about-me'>{{ items.About1 }}</p>
+                        <img v-if="items.Image2" :src="items.Image2" alt="">
+                        <img v-if="items.Image3" :src="items.Image3" alt="">
+                        <img v-if="items.Image4" :src="items.Image4" alt="">
+                        <div class="links">
+                            <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+                        </div>
                     </div>
-                </div>
+                </transition>
             </div>
         </div>
     </div>
@@ -125,14 +127,25 @@ export default {
 
 .dropdown-content {
     background-color: rgb(115, 201, 220); /* Match the project card background color */
-    padding: 10px;
+    padding: 0; /* Start with no padding */
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
-    display: none; /* Hide content by default */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
 }
 
 .dropdown-content.visible {
-    display: block; /* Show content when visible */
+    max-height: 1000px; /* Arbitrary large value to ensure full height */
+    padding: 10px; /* Add padding when visible */
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0;
 }
 </style>
