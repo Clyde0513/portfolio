@@ -160,13 +160,23 @@ const downloadResume = async () => {
         
     }
 
-    /* .about-me:hover {
+     .about-me:hover {
         transform: scale(1.05);
-    } */
-
+    } 
     .container-one:hover {
         transform: scale(1.05);
+        transition: transform 0.8s;
     }
+    .container-one {
+        transition: transform 0.8s;
+    }
+    .container-one:hover {
+        transform: scale(1.05);
+        transition: transform 0.8s;
+    }
+
+
+
     .profile {
   text-align: center;
   margin-bottom: 2rem;
