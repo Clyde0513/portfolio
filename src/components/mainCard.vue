@@ -153,9 +153,9 @@ const downloadResume = async () => {
     .container-one{
         background-color: lightskyblue;
         padding: 1%;
-        margin-left: 1.5%;
-        width: 95%;
-        border-radius: 40px;
+        margin-left: 0.6%;
+        width: 96%;
+        border-radius: 15px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         
     }
