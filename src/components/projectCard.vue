@@ -1,14 +1,14 @@
 <template>
     <div class="main-container">
-        <div class="project-card" v-for="(items, index) in projectData.ProjectsArray" v-bind:key="items">
+        <div class="project-card" v-for="(items) in projectData.ProjectsArray" v-bind:key="items">
             <h2>{{ items.Title }}</h2>
             <img :src="items.Image" alt="">
             <img :src="items.Image1" alt="">
             <p class='about-me'>{{ items.About }}</p>
             <p class='about-me'>{{ items.About1 }}</p>
-            <img v-if="index === 0" :src="items.Image2" alt="">
-            <img v-if="index === 0" :src="items.Image3" alt="">
-            <img v-if="index === 0" :src="items.Image4" alt="">
+            <img v-if="items.Image2" :src="items.Image2" alt="">
+            <img v-if="items.Image3" :src="items.Image3" alt="">
+            <img v-if="items.Image4" :src="items.Image4" alt="">
             <div class="links">
                 <a :href="items.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
             </div>
@@ -29,19 +29,24 @@ export default {
 
 <style scoped>
 .main-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
+    gap: 20px; /* Add gap between grid items */
+    justify-items: center; /* Center items horizontally */
+    align-items: start; /* Align items at the top */
+    padding-left: 20px; /* Add padding to the left side */
 }
 .project-card {
-    margin: 20px;
     padding: 10px;
-    flex: 0 0 28%;
     background-color: rgb(115, 201, 220);
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.3s;
+    min-height: 450px; /* Set a minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* Ensure content does not overflow */
 }
 .project-card:hover {
     transform: scale(1.05);
@@ -49,8 +54,9 @@ export default {
 }
 .project-card img {
     height: 11rem;
-    width: 100%;
+    width: 80%;
     border-radius: 15px;
+    margin: 10px auto;
 }
 
 .links {
@@ -73,5 +79,8 @@ export default {
     margin-top: 10px;
     font-size: 1rem;
     color: #333;
+    overflow: hidden; /* Ensure text does not overflow */
+    text-overflow: ellipsis;
+    white-space: normal; /* Allow text to wrap */
 }
 </style>
