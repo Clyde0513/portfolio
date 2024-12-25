@@ -42,6 +42,9 @@ const downloadResume = async () => {
         <div class="button-container">
             <router-link to="/research" class="tech-button">Research</router-link>
         </div>
+        <div class="button-container">
+            <router-link to="/interests" class="tech-button">Personal Interests</router-link>
+        </div>
     </div>
     
     <div class="social-links">
@@ -78,24 +81,14 @@ const downloadResume = async () => {
     <div class = 'about-me'>
         <h1 class = 'about-me-1'>About me</h1>
         <p>Hello! My name is Clyde Villacrusis and I am majoring in Computer Science and majoring in Linguistics & CS at UCLA as a 3rd year. 
-        In my free time, I like to watch kdramas and play videogames. When given the opportunity,
-        I tend to code stuff such as making my own personal website, e.g. to showcase 
-         many of my projects that I have done in the past. In addition, I am apart of ACM AI in which we build AI models, 
-        such as using Pytorch and CNNs.😊
+        When given the opportunity, I tend to code stuff such as making my own personal website, e.g. to showcase 
+         many of my projects that I have done in the past.😊
         <br/>
         <br/>
         <b>I am currently interning at UCLA Health to develop an AI application that translates unorganized
         blood pressure data into a cleaned and organized format. Currently, the tools I am using are OCR tools,
         smart on Fire, and ChatGPT enterprise models. When the AI application is complete, I hope to see a growth
         in the number of patients that are able to get their blood pressure data organized and cleaned.</b>
-        <br/>
-        <br/>
-        I liked programming because of how cool it is that every successful code I ran, it is extremely satisfying. I started to learn programming and getting into it when I took
-        AP Computer Science A during my senior year of highschool. The first language I learned was Java and the language I first struggled because everything was new to me:
-        from basic variable syntax to the end of the AP unit: Recursion. Since then, I interned at a nonprofit company called Curls&Careers where I enhanced my coding abilities
-        regarding CSS, JS, and HTML. My primary goal was to revamp the website so that it looks clean and readable for HS students finding mentors (mentorship program). It was a fun
-        internship that lasted for about 5 months.
-     
         <br/>
         <br/>
         At the moment, I am a part of KAWAN (Filipino-Catholic Club) as an Associate Executive Director and PIES (Pilipino in Engineering and Sciences) here at UCLA. Being a part of these clubs have helped me come out

@@ -6,7 +6,12 @@ import research from '../components/research.vue';
 const routes = [
   { path: '/', name: 'Clyde\'s website', component: mainCard, meta: {title: 'Clyde\'s website'} },
   { path: '/projects', component: projectCard },
-  { path: '/research', component: research }
+  { path: '/research', component: research },
+  {
+    path: '/interests',
+    name: 'interests',
+    component: () => import('../views/InterestsView.vue')
+  }
 ];
 
 const router = createRouter({
