@@ -34,7 +34,7 @@ export default {
 /* Add global styles for the entire app */
 body {
   margin: 0;
-  background-color: rgb(39, 112, 158); /* Change the background color here */
+  background-color: #163f4b; /* Change the background color here */
 }
 #app {
   font-family: 'Times New Roman', Times, serif;

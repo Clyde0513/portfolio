@@ -115,7 +115,7 @@ export default {
 }
 .dropdown-title {
     cursor: pointer;
-    color: #3498db;
+    color: #0f4f79;
     transition: color 0.3s;
 }
 
