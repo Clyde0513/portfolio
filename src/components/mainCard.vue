@@ -160,9 +160,7 @@ const downloadResume = async () => {
         
     }
 
-     .about-me:hover {
-        transform: scale(1.05);
-    } 
+   
     .container-one:hover {
         transform: scale(1.05);
         transition: transform 0.8s;
@@ -174,6 +172,8 @@ const downloadResume = async () => {
         transform: scale(1.05);
         transition: transform 0.8s;
     }
+
+
 
 
 
@@ -247,7 +247,7 @@ const downloadResume = async () => {
         
     }
 
-    .about-me p {
+    .container-two p {
         color: rgb(38, 26, 26);
         line-height: 1.6;
         font-size: 1.1rem;
@@ -255,6 +255,25 @@ const downloadResume = async () => {
         padding: 0 1rem;
         font-family: sans-serif;
         }
+
+    .about-me-1 p:hover {
+        transform: scale(1.05);
+    } 
+    .container-two:hover {
+        transform: scale(1.05);
+        transition: transform 0.8s;
+    }
+
+    .container-two {
+        transition: transform 0.8s;
+    }
+    .container-two:hover {
+        transform: scale(1.05);
+        transition: transform 0.8s;
+    }
+
+
+
     .logos img{
         height: 2.5rem;
     }
