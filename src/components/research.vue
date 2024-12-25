@@ -64,6 +64,27 @@
             </div>
           </transition>
         </div>
+
+        <div class="paper-section">
+          <div class="dropdown-header" @click="togglePaper3">
+            <h2>Dynamic Hand Gesture Classification</h2>
+            <span class="arrow">{{ isOpen3 ? '▼' : '▶' }}</span>
+          </div>
+          <transition name="slide">
+            <div class="paper-content" v-if="isOpen3">
+              <h3>Overview</h3>
+              <p>Hand gestures are a form of non-verbal communication that conveys information and emotion through the motion of hands. This has significant applications in human-computer interfaces; hand gesture recognition systems can implement touchless systems, sign language translation, or assist the impaired. One of the challenges in hand gesture recognition is the processing of a dynamic hand gesture (DHG). Unlike static hand gestures, which convey information through the basic pose of the hand, DHGs communicate information through both spatial and temporal dimensions of the hand pose. Thus, any system that processes DHGs must contain the context of recently seen movements to formulate a hand gesture classification, disregard any invalid or unrecognized hand gestures over a data stream, and achieve computational performance such that classification can be performed in a real-time setting.
+                </p>
+                <br/>
+                <p>
+                  In recent years, deep learning techniques have achieved human-like accuracy in DHG classification. These techniques have all taken both spatial and temporal information into account, but vary widely in methodology. This report will highlight three different deep learning architectures that classify dynamic hand gestures. The first model builds upon previous Recurrent Neural Networks to create a Recurrent 3D Convolutional Neural Network to encode both spatial and temporal states for the classification of DHGs. The second model uses Google’s Mediapipe to extract landmarks of the user’s hand to create a more accurate classification. The third model is a hybrid deep learning model that obtains high-level features with ImageNet, ResNet50v2, and Mediapipe to increase dynamic hand recognition accuracy.
+                </p>
+              <a href="https://ucladeepvision.github.io/CS163-Projects-2024Fall/2024/12/13/team43-hand-gesture-classification.html#overview" target="_blank" class="github-link">
+                <img src="../assets/github.png" alt="GitHub Logo" class="github-logo">
+              </a>
+            </div>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -75,7 +96,8 @@ export default {
   data() {
     return {
       isOpen: false,
-      isOpen2: false
+      isOpen2: false,
+      isOpen3: false
     }
   },
   methods: {
@@ -87,6 +109,9 @@ export default {
     },
     togglePaper2() {
       this.isOpen2 = !this.isOpen2
+    },
+    togglePaper3() {
+      this.isOpen3 = !this.isOpen3
     }
   }
 }
