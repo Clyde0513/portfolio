@@ -1,24 +1,45 @@
 <template>
-    <div>
+    <div class="page-container">
         <div class="back-button" @click="$router.push('/')">← Go Back</div>
         <div class="reminder-button">Reminder: Projects are clickable!</div>
         <div class="main-container">
-            <div class="project-card" v-for="(item, index) in projectData.ProjectsArray" v-bind:key="index">
-                <h2 @click="toggleDropdown(item)" class="dropdown-title">{{ item.Title }}</h2>
-                <transition name="fade">
-                    <div :class="['dropdown-content', { 'visible': item.showDropdown }]">
-                        <img :src="item.Image" alt="">
-                        <img :src="item.Image1" alt="">
-                        <p class='about-me'>{{ item.About }}</p>
-                        <p class='about-me'>{{ item.About1 }}</p>
-                        <img v-if="item.Image2" :src="item.Image2" alt="">
-                        <img v-if="item.Image3" :src="item.Image3" alt="">
-                        <img v-if="item.Image4" :src="item.Image4" alt="">
-                        <div class="links">
-                            <a :href="item.Link" target="_blank"><img src="../assets/github.png" alt="Github Logo"></a>
+            <div class="project-card" 
+                 v-for="(item, index) in projects" 
+                 v-bind:key="index"
+                 :style="{ animationDelay: index * 0.2 + 's' }">
+                <div class="card-content">
+                    <h2 @click="toggleProject(index)" class="dropdown-title">
+                        {{ item.Title }}
+                        <span :class="['click-indicator', { 'rotated': activeIndex === index }]"></span>
+                    </h2>
+                    
+                    <transition
+                        name="slide-fade"
+                        @enter="startTransition"
+                        @leave="endTransition"
+                    >
+                        <div v-show="activeIndex === index" 
+                             :class="['dropdown-content', { 'visible': activeIndex === index }]">
+                            <div class="image-gallery">
+                                <img :src="item.Image" alt="" class="fade-in">
+                                <img :src="item.Image1" alt="" class="fade-in">
+                                <img v-if="item.Image2" :src="item.Image2" alt="" class="fade-in">
+                                <img v-if="item.Image3" :src="item.Image3" alt="" class="fade-in">
+                                <img v-if="item.Image4" :src="item.Image4" alt="" class="fade-in">
+                            </div>
+                            <div class="project-details">
+                                <p class='about-me'>{{ item.About }}</p>
+                                <p class='about-me'>{{ item.About1 }}</p>
+                            </div>
+                            <div class="links">
+                                <a :href="item.Link" target="_blank" class="github-link">
+                                    <img src="../assets/github.png" alt="Github Logo">
+                                    <span>View on GitHub</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </transition>
+                    </transition>
+                </div>
             </div>
         </div>
     </div>
@@ -26,149 +47,260 @@
 
 <script>
 import jsonData from "/projects.json"
+
 export default {
     data() {
         return {
-            projectData: jsonData
+            projects: jsonData.ProjectsArray,
+            activeIndex: false
         }
     },
     methods: {
-        toggleDropdown(item) {
-            item.showDropdown = !item.showDropdown;
+        toggleProject(index) {
+            // If clicking the same project, close it
+            // Otherwise, open the clicked project and close others
+            this.activeIndex = this.activeIndex === index ? false : index;
+        },
+        startTransition(el) {
+            el.style.height = 'auto';
+            const height = el.offsetHeight;
+            el.style.height = '0px';
+            el.offsetHeight; // force reflow
+            el.style.height = height + 'px';
+        },
+        endTransition(el) {
+            el.style.height = '0px';
         }
     }
 }
 </script>
 
 <style scoped>
-.back-button {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: rgb(146, 169, 203);
-    z-index: 100;
-}
-
-.back-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.reminder-button {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    color: rgb(146, 169, 203);
-    z-index: 100;
-}
-
-.reminder-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+.page-container {
+    min-height: 100vh;
+    background-color: #163f4b;
+    padding: 4rem 2rem;
 }
 
 .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 45px; /* Add gap between grid items */
-    justify-items: center; /* Center items horizontally */
-    align-items: start; /* Align items at the top */
-    padding: 20px; /* Add padding around the container */
-    margin-top: 80px; /* Add top margin to prevent overlap with back button */
-}
-.project-card {
-    padding: 20px;
-    background-color: rgb(115, 201, 220);
-    border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    min-height: 100px; /* Set a minimum height */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Changed from space-between */
-    /* removed overflow: hidden */
-}
-.project-card:hover {
-    transform: scale(1.0147);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.project-card img {
-    height: auto;
-    width: 100%;
-    max-height: 800px; /* Set a maximum height */
-    border-radius: 15px;
-    margin: 10px 0;
-    object-fit: cover; /* Ensure images cover the area */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
 }
 
-.links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 10px;
+.project-card {
+    background-color: rgb(115, 201, 220);
+    border-radius: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease-in-out;
 }
-.links img {
-    height: 1.5rem;
-    margin: 5px;
-    transition: transform 0.3s;
+
+.card-content {
+    padding: 1.5rem;
 }
-.links img:hover {
-    transform: scale(1.2);
-}
-.about-me {
-    width: 100%;
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #333;
-    overflow: hidden; /* Ensure text does not overflow */
-    text-overflow: ellipsis;
-    white-space: normal; /* Allow text to wrap */
-    line-height: 1.5; /* Improve readability */
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color:rgb(3, 24, 29)
-}
+
 .dropdown-title {
-    cursor: pointer;
+    font-size: 1.5rem;
     color: #0f4f79;
-    transition: color 0.3s;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 0.5rem;
 }
 
 .dropdown-title:hover {
     color: #2980b9;
+    transform: translateX(10px);
+}
+
+.click-indicator {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #0f4f79;
+    border-bottom: 2px solid #0f4f79;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.click-indicator.rotated {
+    transform: translateY(-50%) rotate(-135deg);
 }
 
 .dropdown-content {
-    background-color: rgb(115, 201, 220); /* Match the project card background color */
-    padding: 0; /* Start with no padding */
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    max-height: 0;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    transform-origin: top;
-    transform: scaleY(0);
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+    height: 0;
 }
 
 .dropdown-content.visible {
-    max-height: 5000px; /* Increased max-height */
+    height: auto;
     opacity: 1;
-    padding: 10px;
-    transform: scaleY(1);
+    padding: 1rem;
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.5s;
+.image-gallery {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.image-gallery img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
     opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.image-gallery img:hover {
+    transform: scale(1.02);
+}
+
+.project-details {
+    margin: 1.5rem 0;
+}
+
+.about-me {
+    color: #03181d;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards 0.3s;
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #0f4f79;
+    transition: transform 0.3s ease;
+}
+
+.github-link:hover {
+    transform: translateY(-2px);
+}
+
+.github-link img {
+    width: 24px;
+    height: 24px;
+}
+
+.back-button, .reminder-button {
+    position: fixed;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    color: rgb(146, 169, 203);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.back-button {
+    top: 2rem;
+    left: 2rem;
+    cursor: pointer;
+}
+
+.reminder-button {
+    top: 2rem;
+    right: 2rem;
+}
+
+.back-button:hover, .reminder-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.expand-enter-active, .expand-leave-active {
+    transition: all 0.5s ease;
+    max-height: 2000px;
+    opacity: 1;
+}
+
+.expand-enter-from, .expand-leave-to {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-fade-enter-active {
+    animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-fade-leave-active {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .back-button, .reminder-button {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 1rem;
+        text-align: center;
+    }
 }
 </style>

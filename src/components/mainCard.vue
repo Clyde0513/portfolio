@@ -131,6 +131,7 @@ const downloadResume = async () => {
         min-height: 100vh;
         padding: 20px;
         background-color: #163f4b;
+        animation: backgroundPulse 10s ease-in-out infinite;
     }
     img{
         height: 10px;
@@ -142,6 +143,7 @@ const downloadResume = async () => {
         border-radius: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 2rem;
+        animation: containerGlow 3s ease-in-out infinite;
     }
     .container-one{
         background-color: lightskyblue;
@@ -150,7 +152,8 @@ const downloadResume = async () => {
         width: 96%;
         border-radius: 15px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        
+        position: relative;
+        overflow: hidden;
     }
 
    
@@ -166,9 +169,24 @@ const downloadResume = async () => {
         transition: transform 0.8s;
     }
 
-
-
-
+    .container-one::before, .container-two::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            transparent 40%,
+            rgba(255, 255, 255, 0.1),
+            transparent 60%,
+            transparent
+        );
+        animation: glowingBorder 3s linear infinite;
+        pointer-events: none;
+    }
 
     .profile {
   text-align: center;
@@ -183,6 +201,8 @@ const downloadResume = async () => {
     object-fit: cover;
     margin-bottom: 1rem;
     border: 3px solid #3498db;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+    animation: profilePulse 2s ease-in-out infinite;
     }
 
     .profile h3 {
@@ -212,6 +232,8 @@ const downloadResume = async () => {
         background-color: lightskyblue;
         border-radius: 15px;
         backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
     }
 
     
@@ -269,6 +291,12 @@ const downloadResume = async () => {
 
     .logos img{
         height: 2.5rem;
+        transition: transform 0.3s, filter 0.3s;
+    }
+
+    .logos img:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.8));
     }
 
     .research-button{
@@ -296,6 +324,7 @@ const downloadResume = async () => {
     .link a:hover {
     background-color: #054163;
     transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(5, 65, 99, 0.6);
     }
 
     .tech-button {
@@ -307,10 +336,35 @@ const downloadResume = async () => {
         text-decoration: none;
         border-radius: 5px;
         transition: background-color 0.3s;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
     }
 
     .tech-button:hover {
-        background-color: #2980b9;
+        background: linear-gradient(45deg, #2980b9, #3498db);
+        box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+    }
+
+    @keyframes backgroundPulse {
+        0%, 100% { background-color: #163f4b; }
+        50% { background-color: #1a4857; }
+    }
+
+    @keyframes containerGlow {
+        0%, 100% { box-shadow: 0 4px 15px rgba(0, 119, 171, 0.3); }
+        50% { box-shadow: 0 4px 25px rgba(0, 119, 171, 0.5); }
+    }
+
+    @keyframes profilePulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(52, 152, 219, 0.5); }
+        50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(52, 152, 219, 0.8); }
+    }
+
+    @keyframes glowingBorder {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     @media only screen and (max-width: 950px){
