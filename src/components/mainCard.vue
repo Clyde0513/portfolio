@@ -22,7 +22,7 @@ const downloadResume = async () => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Clyde_Resume.pdf';
+    a.download = 'ClydeResume.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
