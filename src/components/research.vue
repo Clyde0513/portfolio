@@ -108,7 +108,7 @@ export default {
       isOpen3: false,
       scrollProgress: 0,
       stats: [
-        { target: 3, current: 0, label: 'Papers' }
+        { target: 3, current: 3, label: 'Papers' }
       ],
     }
   },
