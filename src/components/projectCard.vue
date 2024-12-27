@@ -7,11 +7,8 @@
                  v-for="(item, index) in projects" 
                  v-bind:key="index"
                  :style="{ animationDelay: index * 0.2 + 's' }">
-                <div class="card-content">
-                    <h2 @click="toggleProject(index)" class="dropdown-title">
-                        {{ item.Title }}
-                        <span :class="['click-indicator', { 'rotated': activeIndex === index }]"></span>
-                    </h2>
+                <div class="card-content">  
+                    <h2 @click="toggleProject(index)" class="dropdown-title"> {{ item.Title }}</h2>
                     
                     <transition
                         name="slide-fade"
@@ -21,16 +18,17 @@
                         <div v-show="activeIndex === index" 
                              :class="['dropdown-content', { 'visible': activeIndex === index }]">
                             <div class="image-gallery">
-                                <img :src="item.Image" alt="" class="fade-in">
-                                <img :src="item.Image1" alt="" class="fade-in">
-                                <img v-if="item.Image2" :src="item.Image2" alt="" class="fade-in">
-                                <img v-if="item.Image3" :src="item.Image3" alt="" class="fade-in">
-                                <img v-if="item.Image4" :src="item.Image4" alt="" class="fade-in">
-                            </div>
+                                <img :src="item.Image" alt="" >
+                                <img :src="item.Image1" alt="" >
                             <div class="project-details">
                                 <p class='about-me'>{{ item.About }}</p>
                                 <p class='about-me'>{{ item.About1 }}</p>
                             </div>
+                                <img v-if="item.Image2" :src="item.Image2" alt="">
+                                <img v-if="item.Image3" :src="item.Image3" alt="" >
+                                <img v-if="item.Image4" :src="item.Image4" alt="">
+                            </div>
+                          
                             <div class="links">
                                 <a :href="item.Link" target="_blank" class="github-link">
                                     <img src="../assets/github.png" alt="Github Logo">
@@ -52,24 +50,38 @@ export default {
     data() {
         return {
             projects: jsonData.ProjectsArray,
-            activeIndex: false
+            activeIndex: false,
+            isMobile: false
         }
     },
+    mounted() {
+        // Initial check for mobile
+        this.checkMobile();
+        // Add resize listener
+        window.addEventListener('resize', this.checkMobile);
+    },
+    beforeUnmount() {
+        // Clean up listener
+        window.removeEventListener('resize', this.checkMobile);
+    },
     methods: {
+        checkMobile() {
+            this.isMobile = window.innerWidth <= 768;
+        },
         toggleProject(index) {
-            // If clicking the same project, close it
-            // Otherwise, open the clicked project and close others
-            this.activeIndex = this.activeIndex === index ? false : index;
+            this.activeIndex = this.activeIndex === index ? null : index; // Open or close based on the clicked index
+
         },
         startTransition(el) {
-            el.style.height = 'auto';
-            const height = el.offsetHeight;
-            el.style.height = '0px';
+            const height = el.scrollHeight;
+            el.style.height = '0';
             el.offsetHeight; // force reflow
             el.style.height = height + 'px';
         },
         endTransition(el) {
-            el.style.height = '0px';
+            el.style.height = el.scrollHeight + 'px';
+            el.offsetHeight; // force reflow
+            el.style.height = '0';
         }
     }
 }
@@ -142,6 +154,8 @@ export default {
     overflow: hidden;
     transition: height 0.3s ease-out;
     height: 0;
+    grid-column: span 1; /* Ensure it spans independently */
+
 }
 
 .dropdown-content.visible {
@@ -258,12 +272,18 @@ export default {
     transform: translateY(-10px);
 }
 
-.slide-fade-enter-active {
-    animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.5s ease;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.slide-fade-leave-active {
-    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 @keyframes slideDown {
