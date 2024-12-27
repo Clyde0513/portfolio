@@ -1,19 +1,18 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { config } from '../utils/envUtility';
+// import { config } from '../utils/envUtility';
 
 const error = ref(null);
+
+const getApiUrl = () => {
+  return process.env.NODE_ENV === 'production' 
+    ? 'https://api.clyde.at/download-resume'  
+    : 'http://localhost:3000/download-resume';
+};
+
 const downloadResume = async () => {
   try {
-    if (!config.resumeUrl() || !config.blobToken()) {
-      throw new Error('Resume configuration is missing');
-    }
-    
-    const response = await fetch(config.resumeUrl(), {
-      headers: {
-        'Authorization': `Bearer ${config.blobToken()}`
-      }
-    });    
+    const response = await fetch(getApiUrl());
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
