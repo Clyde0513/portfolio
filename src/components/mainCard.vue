@@ -24,6 +24,11 @@ const downloadResume = async () => {
     console.error('Download failed:', error);
   }
 };
+
+const getRandomEmoji = () => {
+  const emojis = ['👨‍💻', '🚀', '💡', '⚡', '✨'];
+  return emojis[Math.floor(Math.random() * emojis.length)];
+};
 </script>
 
 <template>
@@ -36,6 +41,9 @@ const downloadResume = async () => {
         <img src="../assets/me.png" alt="my photo">
         <h3>Clyde Villacrusis</h3>
         <p>UCLA 3rd Year Computer Science Student, in addition to majoring in Linguistics and CS</p>
+        <div class="status-badge">
+          <span>{{ getRandomEmoji() }} Currently: Developing my Client's Website</span>
+        </div>
         <div class="button-container">
             <router-link to="/projects" class="tech-button">Projects</router-link>
         </div>
@@ -105,6 +113,10 @@ const downloadResume = async () => {
             <img src = "../assets/python.png" alt = "Python Language Logo">
             <img src = "../assets/Vue.png" alt = "Vue Language Logo">
             <img src = "../assets/java.png" alt = "Java Language Logo">
+            <div class="tech-tooltip" v-for="tech in technologies" :key="tech.name">
+              <img :src="tech.logo" :alt="tech.name">
+              <span class="tooltip-text">{{ tech.experience }}</span>
+            </div>
         </div>
         
     </div>
@@ -218,6 +230,16 @@ const downloadResume = async () => {
     font-size: 1.2rem;
     }
 
+    .status-badge {
+      background: rgba(52, 152, 219, 0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin: 10px auto;
+      display: inline-block;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(52, 152, 219, 0.2);
+      animation: pulse 2s infinite;
+    }
 
     .social-links {
     display: flex;
@@ -299,6 +321,32 @@ const downloadResume = async () => {
         filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.8));
     }
 
+    .tech-tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip-text {
+      visibility: hidden;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tech-tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
     .research-button{
        background-color: rgb(33, 7, 128);
        margin: 5px;
@@ -365,6 +413,12 @@ const downloadResume = async () => {
     @keyframes glowingBorder {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     @media only screen and (max-width: 950px){
