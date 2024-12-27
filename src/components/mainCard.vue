@@ -101,7 +101,7 @@ const initParticles = () => {
   resizeCanvas();
 
   // Particle class
-  class Particle {
+    class Particle {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
@@ -176,6 +176,9 @@ const initParticles = () => {
           </div>
           <div class="button-container">
             <router-link to="/interests" class="tech-button">Personal Interests</router-link>
+          </div>
+          <div class="button-container">
+            <router-link to="/checkers" class="tech-button">Play Checkers vs AI</router-link>
           </div>
         </div>
         <div class="social-links">
