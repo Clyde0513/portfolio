@@ -225,6 +225,8 @@ export default {
   animation: fadeInUp 0.6s ease forwards;
   position: relative;
   overflow: hidden;
+  margin-left: -50px;
+  
 }
 
 .paper-section:nth-child(2) {
