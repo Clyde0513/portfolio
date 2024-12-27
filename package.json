@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@vercel/blob": "^0.27.0",
