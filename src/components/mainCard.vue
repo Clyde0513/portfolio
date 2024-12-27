@@ -5,11 +5,20 @@ import { config } from '../utils/envUtility';
 const error = ref(null);
 const downloadResume = async () => {
   try {
+    if (!config.resumeUrl() || !config.blobToken()) {
+      throw new Error('Resume configuration is missing');
+    }
+    
     const response = await fetch(config.resumeUrl(), {
       headers: {
         'Authorization': `Bearer ${config.blobToken()}`
       }
     });    
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -20,8 +29,8 @@ const downloadResume = async () => {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   } catch (err) {
-    error.value = err.message;
-    console.error('Download failed:', error);
+    error.value = `Failed to download resume: ${err.message}`;
+    console.error('Download failed:', error.value);
   }
 };
 

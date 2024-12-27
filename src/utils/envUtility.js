@@ -1,12 +1,4 @@
-const getEnvVariable = (key) => {
-    const value = import.meta.env[key];
-    if (!value) {
-      throw new Error(`Environment variable ${key} is not defined`);
-    }
-    return value;
-  };
-  
-  export const config = {
-    resumeUrl: () => getEnvVariable('VITE_RESUME_URL'),
-    blobToken: () => getEnvVariable('VITE_BLOB_READ_WRITE_TOKEN')
-  };
+export const config = {
+  resumeUrl: () => process.env.VUE_APP_RESUME_URL,
+  blobToken: () => process.env.VUE_APP_BLOB_READ_WRITE_TOKEN 
+};
