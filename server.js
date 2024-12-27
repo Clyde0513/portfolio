@@ -15,8 +15,8 @@ app.use(cors({
   credentials: true
 }));
 
-// Serve static files from the Vue production build
-app.use(express.static(path.join(__dirname, 'dist')));
+// // Serve static files from the Vue production build
+// app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/download-resume', async (req, res) => {
   try {
