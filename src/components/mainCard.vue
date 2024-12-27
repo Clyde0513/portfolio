@@ -46,7 +46,7 @@ const skills = [
 
 onMounted(() => {
   // Animate achievement counters
-  const targetAchievements = { projects: 6, codeLines: 15000, caffeineCups: 324 };
+  const targetAchievements = { projects: 6, codeLines: 15000, Kdramas: 250 };
   Object.keys(targetAchievements).forEach(key => {
     let current = 0;
     const target = targetAchievements[key];
@@ -212,8 +212,8 @@ const initParticles = () => {
             <p>Lines of Code</p>
           </div>
           <div class="achievement-item">
-            <h3>{{ achievements.caffeineCups }}</h3>
-            <p>Cups of Coffee</p>
+            <h3>{{ achievements.Kdramas }}</h3>
+            <p>Kdramas</p>
           </div>
         </div>
         <div class="skills-container">
