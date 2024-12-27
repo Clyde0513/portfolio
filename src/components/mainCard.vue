@@ -6,7 +6,7 @@ const error = ref(null);
 
 const getApiUrl = () => {
   return process.env.NODE_ENV === 'production' 
-    ? 'https://api.clyde.at/download-resume'  
+    ? process.env.VUE_APP_RESUME_URL  
     : 'http://localhost:3000/download-resume';
 };
 
