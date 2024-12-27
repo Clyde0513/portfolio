@@ -1,14 +1,22 @@
 <template>
   <div class="tech-page">
+    <div class="particles-container" ref="particlesContainer"></div>
+    <div class="reading-progress-bar" :style="{ width: scrollProgress + '%' }"></div>
     <div class="page-content">
       <div class="back-button" @click="goBack">
         ← Go Back
       </div>
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Papers</span>
+        </div>
+      </div>
       <div class="research-container">
-        <h1>Research Papers</h1>
+        <h1 class="animated-title">Research Papers</h1>
         <div class="paper-section">
           
-          <div class="dropdown-header" @click="togglePaper">
+          <div class="dropdown-header wave-text" @click="togglePaper">
             <h2>[Morphology] Taglish: A Mixed-Code Language of English and Tagalog</h2>
             <span class="arrow">{{ isOpen ? '▼' : '▶' }}</span>
           </div>
@@ -45,7 +53,7 @@
   
         <!-- Second Paper Section -->
         <div class="paper-section">
-          <div class="dropdown-header" @click="togglePaper2">
+          <div class="dropdown-header wave-text" @click="togglePaper2">
             <h2>Attack to LLM-based Web Agent to cause PII Leakage/Phishing/Malicious Behavior </h2>
             <span class="arrow">{{ isOpen2 ? '▼' : '▶' }}</span>
           </div>
@@ -66,7 +74,7 @@
         </div>
 
         <div class="paper-section">
-          <div class="dropdown-header" @click="togglePaper3">
+          <div class="dropdown-header wave-text" @click="togglePaper3">
             <h2>Dynamic Hand Gesture Classification</h2>
             <span class="arrow">{{ isOpen3 ? '▼' : '▶' }}</span>
           </div>
@@ -97,8 +105,25 @@ export default {
     return {
       isOpen: false,
       isOpen2: false,
-      isOpen3: false
+      isOpen3: false,
+      scrollProgress: 0
     }
+  },
+  mounted() {
+    this.initParticles();
+    window.addEventListener('scroll', this.handleScroll);
+    document.querySelectorAll('.paper-section').forEach(section => {
+      section.addEventListener('mousemove', (e) => {
+        const rect = section.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        section.style.setProperty('--x', `${x}%`);
+        section.style.setProperty('--y', `${y}%`);
+      });
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     togglePaper() {
@@ -112,6 +137,26 @@ export default {
     },
     togglePaper3() {
       this.isOpen3 = !this.isOpen3
+    },
+    initParticles() {
+      const particles = [];
+      const container = this.$refs.particlesContainer;
+      
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = 5 + Math.random() * 10 + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(particle);
+        particles.push(particle);
+      }
+    },
+    handleScroll() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrollTop = window.scrollY;
+      this.scrollProgress = (scrollTop / documentHeight) * 100;
     }
   }
 }
@@ -155,12 +200,39 @@ export default {
   margin: 0 auto;
   padding: 2rem;
   color: white;
+  margin-top: -80px;
+}
+
+.animated-title {
+  background: linear-gradient(45deg, #64B5F6, #1976D2, #0D47A1);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient 3s ease infinite;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .paper-section {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   margin: 1rem 0;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.paper-section:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
 .dropdown-header {
@@ -175,9 +247,56 @@ export default {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+.wave-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #64B5F6, transparent);
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.wave-text:hover::after {
+  animation: wave 1.5s ease-in-out;
+  opacity: 1;
+}
+
+.dropdown-header h2 {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-header:hover h2 {
+  color: #64B5F6;
+  transform: translateX(10px);
+}
+
 .paper-content {
   padding: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.paper-content p {
+  line-height: 1.6;
+  color: #B0BEC5;
+  transition: color 0.3s ease;
+}
+
+.paper-content:hover p {
+  color: #ECEFF1;
 }
 
 h1, h2, h3 {
@@ -198,6 +317,7 @@ h1, h2, h3 {
   height: 50px;
   margin-top: 20px;
   transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(100, 181, 246, 0.6));
 }
 
 .github-link:hover .github-logo {
@@ -206,7 +326,7 @@ h1, h2, h3 {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
@@ -219,6 +339,121 @@ h1, h2, h3 {
 .slide-enter-to,
 .slide-leave-from {
   transform: translateY(0);
+  opacity: 1;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(100, 181, 246, 0.5);
+  border-radius: 50%;
+  animation: float linear infinite;
+  transform-origin: center center;
+}
+
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #64B5F6, #1976D2);
+  z-index: 1000;
+  transition: width 0.2s ease;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  margin-top: 0px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #64B5F6;
+  text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #B0BEC5;
+  margin-top: 0.5rem;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.paper-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(100, 181, 246, 0.1) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.paper-section:hover::before {
   opacity: 1;
 }
 </style>
