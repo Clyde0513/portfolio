@@ -241,7 +241,7 @@ const initParticles = () => {
           </div>
         </div>
         <div class="techonology-section">
-          <h1>Techonologies studied</h1>
+          <h1>Technologies studied</h1>
           <div class="logos">
             <img src="../assets/c++.png" alt="C++ Language Logo">
             <img src="../assets/C.png" alt="C Language Logo">
