@@ -7,9 +7,9 @@
         ← Go Back
       </div>
       <div class="stats-container">
-        <div class="stat-item">
-          <span class="stat-number">3</span>
-          <span class="stat-label">Papers</span>
+        <div class="stat-item" v-for="(stat, index) in stats" :key="index">
+          <span class="stat-number" v-intersection-observer="animateNumber">{{ stat.current }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
         </div>
       </div>
       <div class="research-container">
@@ -106,11 +106,15 @@ export default {
       isOpen: false,
       isOpen2: false,
       isOpen3: false,
-      scrollProgress: 0
+      scrollProgress: 0,
+      stats: [
+        { target: 3, current: 0, label: 'Papers' }
+      ],
     }
   },
   mounted() {
     this.initParticles();
+    this.initTiltEffect();
     window.addEventListener('scroll', this.handleScroll);
     document.querySelectorAll('.paper-section').forEach(section => {
       section.addEventListener('mousemove', (e) => {
@@ -157,6 +161,50 @@ export default {
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const scrollTop = window.scrollY;
       this.scrollProgress = (scrollTop / documentHeight) * 100;
+    },
+    initTiltEffect() {
+      document.querySelectorAll('.paper-section').forEach(card => {
+        card.addEventListener('mousemove', this.handleTilt);
+        card.addEventListener('mouseleave', this.resetTilt);
+      });
+    },
+    handleTilt(e) {
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    },
+    resetTilt(e) {
+      e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    },
+    animateNumber(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.stats.forEach(stat => {
+            const duration = 2000;
+            const steps = 60;
+            const increment = stat.target / steps;
+            let current = 0;
+            
+            const timer = setInterval(() => {
+              current += increment;
+              stat.current = Math.round(Math.min(current, stat.target));
+              
+              if (current >= stat.target) {
+                clearInterval(timer);
+              }
+            }, duration / steps);
+          });
+        }
+      });
     }
   }
 }
@@ -204,12 +252,12 @@ export default {
 }
 
 .animated-title {
-  background: linear-gradient(45deg, #64B5F6, #1976D2, #0D47A1);
+  background: linear-gradient(90deg, #64B5F6 0%, #1976D2 25%, #0D47A1 50%, #1976D2 75%, #64B5F6 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradient 3s ease infinite;
+  animation: shimmer 3s linear infinite;
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 2rem;
@@ -226,7 +274,13 @@ export default {
   position: relative;
   overflow: hidden;
   margin-left: -50px;
-  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.paper-section:hover {
+  box-shadow: 0 10px 30px rgba(100, 181, 246, 0.3);
 }
 
 .paper-section:nth-child(2) {
@@ -289,6 +343,20 @@ export default {
     rgba(255, 255, 255, 0.02) 100%
   );
   backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.paper-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    800px circle at var(--x) var(--y),
+    rgba(100, 181, 246, 0.1),
+    transparent 40%
+  );
+  z-index: -1;
 }
 
 .paper-content p {
@@ -363,6 +431,15 @@ h1, h2, h3 {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .particles-container {
   position: fixed;
   top: 0;
@@ -381,6 +458,8 @@ h1, h2, h3 {
   border-radius: 50%;
   animation: float linear infinite;
   transform-origin: center center;
+  filter: blur(1px);
+  box-shadow: 0 0 4px rgba(100, 181, 246, 0.8);
 }
 
 .reading-progress-bar {
@@ -398,6 +477,7 @@ h1, h2, h3 {
   justify-content: center;
   margin: 2rem 0;
   margin-top: 0px;
+  gap: 2rem; /* Optional: remove if not needed since we only have one stat now */
 }
 
 .stat-item {
@@ -408,6 +488,10 @@ h1, h2, h3 {
   padding: 1rem 2rem;
   border-radius: 8px;
   backdrop-filter: blur(5px);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(var(--index) * 0.2s);
 }
 
 .stat-number {
@@ -459,3 +543,4 @@ h1, h2, h3 {
   opacity: 1;
 }
 </style>
+``` 
