@@ -104,9 +104,9 @@ const initParticles = () => {
     }
 
     draw() {
-      ctx.fillStyle = `rgba(52, 152, 219, ${this.opacity})`;
+      ctx.fillStyle = `rgba(52, 1412, 819, ${this.opacity})`;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 4);
       ctx.fill();
     }
   }
