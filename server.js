@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config({ path: '.env.local' });
 
 const app = express();
@@ -13,6 +14,9 @@ app.use(cors({
   methods: ['GET'],
   credentials: true
 }));
+
+// Serve static files from the Vue production build
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/download-resume', async (req, res) => {
   try {
@@ -34,6 +38,11 @@ app.get('/download-resume', async (req, res) => {
   }
 });
 
+// Handle all other routes by serving the Vue app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.listen(port, () => {
-  console.log(`Proxy server listening at http://localhost:${port}`);
+  console.log(`Server listening at http://localhost:${port}`);
 });
