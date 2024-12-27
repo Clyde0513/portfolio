@@ -45,12 +45,13 @@ const skills = [
 ];
 
 const formattedDate = computed(() => {
-  const today = new Date();
-  return today.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+    const today = new Date();
+    return today.toLocaleDateString(navigator.language || 'en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    });
 });
 
 onMounted(() => {
