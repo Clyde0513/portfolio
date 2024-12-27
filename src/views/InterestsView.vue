@@ -1,64 +1,120 @@
 <template>
     <div class="interests-container">
-        <div class="back-button" @click="goBack">
-            ← Go Back
-        </div>
-        <h1>Personal Interests</h1>
-        
-        <div class="interest-section">
-            <div class="interest-card">
-                <h2>Gaming</h2>
-                <p>I enjoy playing various video games like Valorant and Minecraft. Gaming helps me unwind and connect with friends.</p>
-                <div class="image-gallery">
-                    <div class="image-box">
-                        <img src="../assets/reyna.png" alt="Valorant" onerror="this.src='https://via.placeholder.com/300x200'">
-                    </div>
-                    <div class="image-box">
-                        <img src="../assets/mc-removebg-preview.png" alt="Minecraft" onerror="this.src='https://via.placeholder.com/300x200'">
-                    </div>
-                </div>
+        <div class="content-wrapper">
+            <div class="back-button" @click="goBack">
+                ← Go Back
             </div>
+            <h1 class="page-title">Personal Interests</h1>
             
-            <div class="interest-card">
-                <h2>K-Dramas</h2>
-                <p>I'm an avid K-drama viewer! Some of my favorites include fantasies and romantic comedies.</p>
-                <div class="image-gallery">
-                    <div class="image-box">
-                        <img src="../assets/queenoftears.png" alt="K-Drama 1" onerror="this.src='https://via.placeholder.com/300x200'">
-                    </div>
-                    <div class="image-box">
-                        <img src="../assets/lovenextdoor.png" alt="K-Drama 2" onerror="this.src='https://via.placeholder.com/300x200'">
+            <div class="interest-section">
+                <div v-for="(interest, index) in interests" 
+                     :key="index" 
+                     class="interest-card"
+                     :style="{ animationDelay: `${index * 0.2}s` }">
+                    <h2>{{ interest.title }}</h2>
+                    <p>{{ interest.description }}</p>
+                    <div class="image-gallery">
+                        <div v-for="(image, imgIndex) in interest.images" 
+                             :key="imgIndex"
+                             class="image-box"
+                             @click="openImage(image.src)">
+                            <img :src="image.src" :alt="image.alt">
+                            <div class="image-overlay">
+                                <span>Click to expand</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="interest-card">
-                <h2>Filipino Culture</h2>
-                <p>As an active member of Filipino cultural clubs at UCLA, I love participating in cultural events and connecting with my heritage.</p>
-                <div class="image-gallery">
-                    <div class="image-box">
-                        <img src="../assets/2ndsimbanggabi.png" alt="Filipino Culture 1" onerror="this.src='https://via.placeholder.com/300x200'">
-                    </div>
-                    <div class="image-box">
-                        <img src="../assets/SPCN.png" alt="Filipino Culture 2" onerror="this.src='https://via.placeholder.com/300x200'">
-                    </div>
-                </div>
-            </div>
+        <!-- Image Modal -->
+        <div v-if="selectedImage" class="modal" @click="selectedImage = null">
+            <img :src="selectedImage" alt="Expanded view" class="modal-content">
         </div>
     </div>
 </template>
 
 <script>
+import reyna from '../assets/reyna.png'
+import minecraft from '../assets/mc-removebg-preview.png'
+import queenOfTears from '../assets/queenoftears.png'
+import loveNextDoor from '../assets/lovenextdoor.png'
+import simbanggabi from '../assets/2ndsimbanggabi.png'
+import spcn from '../assets/SPCN.png'
+
 export default {
+    data() {
+        return {
+            selectedImage: null,
+            interests: [
+                {
+                    title: 'Gaming',
+                    description: 'I enjoy playing various video games like Valorant and Minecraft. Gaming helps me unwind and connect with friends.',
+                    images: [
+                        { src: reyna, alt: 'Valorant' },
+                        { src: minecraft, alt: 'Minecraft' }
+                    ]
+                },
+                {
+                    title: 'K-Dramas',
+                    description: 'I\'m an avid K-drama viewer! Some of my favorites include fantasies and romantic comedies.',
+                    images: [
+                        { src: queenOfTears, alt: 'K-Drama 1' },
+                        { src: loveNextDoor, alt: 'K-Drama 2' }
+                    ]
+                },
+                {
+                    title: 'Filipino Culture',
+                    description: 'As an active member of Filipino cultural clubs at UCLA, I love participating in cultural events and connecting with my heritage.',
+                    images: [
+                        { src: simbanggabi, alt: 'Filipino Culture 1' },
+                        { src: spcn, alt: 'Filipino Culture 2' }
+                    ]
+                }
+            ]
+        }
+    },
     methods: {
         goBack() {
             this.$router.go(-1);
+        },
+        openImage(src) {
+            this.selectedImage = src;
         }
     }
 }
-
 </script>
+
 <style scoped>
+.interests-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1f3c 0%, #163f4b 100%);
+    color: white;
+    position: relative;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-title {
+    text-align: center;
+    background: linear-gradient(45deg, #3498db, #2ecc71, #3498db);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    animation: shimmer 2s linear infinite;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
 
 .back-button {
   position: relative;
@@ -74,87 +130,178 @@ export default {
 .back-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
-.interests-container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #163f4b;
-    min-height: 100vh;
-    color: white;
-}
-
-.interests-container h1 {
-    text-align: center;
-    color: #3498db;
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
-}
 
 .interest-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     padding: 1rem;
 }
 
 .interest-card {
-    background-color: lightskyblue;
-    border-radius: 15px;
-    padding: 1.5rem;
-    color: #2c3e50;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    padding-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .interest-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .interest-card h2 {
-    color: #054163;
+    color: #3498db;
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+    animation: neonPulse 1.5s ease-in-out infinite;
 }
 
 .interest-card p {
-    line-height: 1.6;
-    font-size: 1.1rem;
+    text-align: center;
+    background: linear-gradient(45deg, #2b5f82, #2ecc71, #3498db);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    font-weight: 800;
+    animation: shimmer 5s linear infinite;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(10, 176, 231, 0.3);
 }
 
 .image-gallery {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .image-box {
+    position: relative;
     width: 100%;
     height: 200px;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .image-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .image-box:hover img {
     transform: scale(1.1);
 }
 
+.image-box:hover .image-overlay {
+    opacity: 1;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(52, 152, 219, 0.5),
+                     0 0 20px rgba(52, 152, 219, 0.3),
+                     0 0 30px rgba(52, 152, 219, 0.1);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(52, 152, 219, 0.8),
+                     0 0 30px rgba(52, 152, 219, 0.5),
+                     0 0 40px rgba(52, 152, 219, 0.3);
+    }
+}
+
 @media (max-width: 768px) {
     .interest-section {
         grid-template-columns: 1fr;
     }
-    .image-gallery {
-        grid-template-columns: 1fr;
+    
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .interest-card {
+        padding: 1.5rem;
     }
 }
 </style>
