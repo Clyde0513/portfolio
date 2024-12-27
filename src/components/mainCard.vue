@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { config } from '../utils/envUtility';
 
 const error = ref(null);
@@ -43,6 +43,15 @@ const skills = [
   { name: 'C++', level: 50 },
   { name: 'Java', level: 50 }
 ];
+
+const formattedDate = computed(() => {
+  const today = new Date();
+  return today.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+});
 
 onMounted(() => {
   // Animate achievement counters
@@ -138,6 +147,9 @@ const initParticles = () => {
 <template>
   <div class="wrapper">
     <canvas class="particles"></canvas>
+    <div class="last-updated">
+      Today's Date: {{ formattedDate }}
+    </div>
     <div class="main-container">
       <div class="container-one">
         <div class="profile">
@@ -636,6 +648,26 @@ img {
   background: linear-gradient(90deg, #3498db, #2980b9);
   transform-origin: left;
   animation: progressAnimation 1.5s ease-out forwards;
+}
+
+.last-updated {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(52, 152, 219, 0.9);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media only screen and (max-width: 950px) {
