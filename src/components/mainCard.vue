@@ -28,7 +28,7 @@ const downloadResume = async () => {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   } catch (err) {
-    error.value = `Failed to download resume: ${err.message}`;
+    error.value = `Failed to download resume:${err.message}`;
     console.error('Download failed:', error.value);
   }
 };
