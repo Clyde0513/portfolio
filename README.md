@@ -52,4 +52,4 @@ UCLA Computer Science and Linguistics student passionate about AI and software d
 - [LinkedIn](https://www.linkedin.com/in/clydevillacrusis/)
 - [Instagram](https://www.instagram.com/sagec1313/)
 
-# It's always work in progress of my website :)
+# Portfolio is always changing! :)
