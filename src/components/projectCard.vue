@@ -24,6 +24,7 @@
                             <div class="project-details">
                                 <p class='about-me'>{{ item.About }}</p>
                                 <p class='about-me'>{{ item.About1 }}</p>
+                                <p class='about-me'>{{ item.About2 }}</p>
                             </div>
                                 <img v-if="item.Image2" :src="item.Image2" alt="">
                                 <img v-if="item.Image3" :src="item.Image3" alt="" >
