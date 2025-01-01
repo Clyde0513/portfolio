@@ -7,9 +7,10 @@
             <div class="project-card" 
                  v-for="(item, index) in projects" 
                  v-bind:key="index"
-                 :style="{ animationDelay: index * 0.2 + 's' }">
+                 :style="{ animationDelay: index * 0.2 + 's' }"
+                 @click="toggleProject(index)">
                 <div class="card-content">  
-                    <h2 @click="toggleProject(index)" class="dropdown-title"> {{ item.Title }}</h2>
+                    <h2 class="dropdown-title"> {{ item.Title }}</h2>
                     
                     <transition
                         name="slide-fade"
@@ -17,7 +18,8 @@
                         @leave="endTransition"
                     >
                         <div v-show="activeIndex === index" 
-                             :class="['dropdown-content', { 'visible': activeIndex === index }]">
+                             :class="['dropdown-content', { 'visible': activeIndex === index }]"
+                             @click.stop>
                             <div class="image-gallery">
                                 <img :src="item.Image" alt="" >
                                 <img :src="item.Image1" alt="" >
@@ -32,7 +34,7 @@
                             </div>
                           
                             <div class="links">
-                                <a :href="item.Link" target="_blank" class="github-link">
+                                <a :href="item.Link" target="_blank" class="github-link" @click.stop>
                                     <img src="../assets/github.png" alt="Github Logo">
                                     <span>View on GitHub</span>
                                 </a>
@@ -156,6 +158,9 @@ export default {
     min-height: 100vh;
     background-color: #163f4b;
     padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-container {
@@ -165,16 +170,26 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project-card {
-    background-color: rgb(115, 201, 220);
-    border-radius: 15px;
+    background-color: rgba(119, 163, 187, 0.9);
+    border-radius: 70px;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.6s ease forwards;
     margin-bottom: 2rem;
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-content {
@@ -184,7 +199,6 @@ export default {
 .dropdown-title {
     font-size: 1.5rem;
     color: #0f4f79;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -219,13 +233,15 @@ export default {
     transition: height 0.3s ease-out;
     height: 0;
     grid-column: span 1; /* Ensure it spans independently */
-
+    background-color: rgba(92, 170, 198, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
 }
 
 .dropdown-content.visible {
     height: auto;
     opacity: 1;
-    padding: 1rem;
 }
 
 .image-gallery {
