@@ -3,6 +3,7 @@
         <canvas class="particles"></canvas>
         <div class="back-button" @click="$router.push('/')">← Go Back</div>
         <div class="reminder-button">Reminder: Projects are clickable!</div>
+        <div class="progress-bar" :style="{ width: scrollProgress + '%' }"></div>
         <div class="main-container">
             <div class="project-card" 
                  v-for="(item, index) in projects" 
@@ -55,7 +56,8 @@ export default {
         return {
             projects: jsonData.ProjectsArray,
             activeIndex: false,
-            isMobile: false
+            isMobile: false,
+            scrollProgress: 0
         }
     },
     mounted() {
@@ -64,10 +66,13 @@ export default {
         this.checkMobile();
         // Add resize listener
         window.addEventListener('resize', this.checkMobile);
+        // Add scroll listener
+        window.addEventListener('scroll', this.updateScrollProgress);
     },
     beforeUnmount() {
-        // Clean up listener
+        // Clean up listeners
         window.removeEventListener('resize', this.checkMobile);
+        window.removeEventListener('scroll', this.updateScrollProgress);
     },
     methods: {
         checkMobile() {
@@ -148,6 +153,11 @@ export default {
 
             createParticles();
             animate();
+        },
+        updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            this.scrollProgress = (scrollTop / docHeight) * 100;
         }
     }
 }
@@ -317,6 +327,16 @@ export default {
 .back-button:hover, .reminder-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: #2980b9;
+    z-index: 101;
+    transition: width 0.25s ease;
 }
 
 /* Animations */
