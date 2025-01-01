@@ -26,11 +26,20 @@ Visit my portfolio at [clyde.at](https://clyde.at)
 - ├── components/
 - │   ├── mainCard.vue # Main profile component
 - │   ├── projectCard.vue
-- │   └── researchCard.vue
+- │   └── research.vue
+- |   └── checkersPage.vue
+- ├── router/
+-     └── index.js
 - ├── assets/ # Images and static resources
 - ├── utils/
-- │   └──blob.js # File handling utilities
+- │   └── blob.js # File handling utilities
+- |   └── envUtility.JS
+- ├── views/
+- |   └── InterestsView.vue
 - └── App.vue # Root component
+- └── index.html
+- └── main.js # Creates the website and its routing syste
+- └── styles.css # Main website's CSS
 ```
 
 ## 👤 About Me
@@ -43,4 +52,4 @@ UCLA Computer Science and Linguistics student passionate about AI and software d
 - [LinkedIn](https://www.linkedin.com/in/clydevillacrusis/)
 - [Instagram](https://www.instagram.com/sagec1313/)
 
-# It's always work in progress of my website :)
+# Portfolio is always changing! :)
