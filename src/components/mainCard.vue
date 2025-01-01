@@ -151,10 +151,22 @@ const initParticles = () => {
   createParticles();
   animate();
 };
+
+const scrollProgress = ref(0);
+const updateScrollProgress = () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.value = (scrollTop / docHeight) * 100;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', updateScrollProgress);
+});
 </script>
 
 <template>
   <div class="wrapper">
+    <div class="reading-progress-bar" :style="{ width: scrollProgress + '%' }"></div>
     <canvas class="particles"></canvas>
     <div class="last-updated">
       Today's Date: {{ formattedDate }}
@@ -534,6 +546,16 @@ img {
   overflow: hidden;
   background: linear-gradient(45deg, #3498db, #2980b9);
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: #2980b9;
+    z-index: 101;
+    transition: width 0.25s ease;
 }
 
 .tech-button:hover {
