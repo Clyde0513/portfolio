@@ -1,6 +1,9 @@
 <template>
-    <div class="page-container">
+    <div class="page-container" :class="theme">
         <canvas class="particles"></canvas>
+        <div class="theme-toggle" @click="toggleTheme">
+            {{ theme === 'dark' ? '☀️' : '🌙' }}
+        </div>
         <div class="back-button" @click="$router.push('/')">← Go Back</div>
         <div class="reminder-button">Reminder: Projects are clickable!</div>
         <div class="progress-bar" :style="{ width: scrollProgress + '%' }"></div>
@@ -54,6 +57,7 @@ import jsonData from "/projects.json"
 export default {
     data() {
         return {
+            theme: 'dark',
             projects: jsonData.ProjectsArray,
             activeIndex: false,
             isMobile: false,
@@ -68,6 +72,7 @@ export default {
         window.addEventListener('resize', this.checkMobile);
         // Add scroll listener
         window.addEventListener('scroll', this.updateScrollProgress);
+        this.theme = localStorage.getItem('theme') || 'dark';
     },
     beforeUnmount() {
         // Clean up listeners
@@ -158,12 +163,54 @@ export default {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             this.scrollProgress = (scrollTop / docHeight) * 100;
-        }
+        },
+        toggleTheme() {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', this.theme);
+        },
     }
 }
 </script>
 
 <style scoped>
+.page-container {
+    min-height: 100vh;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.page-container.dark {
+    background-color: #163f4b;
+    color: white;
+}
+
+.page-container.light {
+    background-color: #e0e8f1;
+    color: #333;
+}
+
+.theme-toggle {
+    position: relative;
+    top: -40px;
+    right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
 .page-container {
     min-height: 100vh;
     background-color: #163f4b;
@@ -432,5 +479,32 @@ export default {
     height: 100%;
     pointer-events: none;
     z-index: 0;
+}
+
+.light .project-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #333;
+}
+
+.light .dropdown-title {
+    color: #2980b9;
+}
+
+.light .paper-content {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.light .back-button,
+.light .reminder-button {
+    color: #2980b9;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.light .dropdown-content {
+    background: rgba(13, 8, 8, 0.1);
+}
+
+.light .about-me {
+    color: #333;
 }
 </style>

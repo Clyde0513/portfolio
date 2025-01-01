@@ -62,6 +62,13 @@ const formattedDate = computed(() => {
     });
 });
 
+const isDarkMode = ref(false);
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  document.body.classList.toggle('dark-mode', isDarkMode.value);
+};
+
 onMounted(() => {
   // Animate achievement counters
   const targetAchievements = { projects: 6, codeLines: 15000, Kdramas: 250 };
@@ -82,6 +89,13 @@ onMounted(() => {
 
   // Initialize particles
   initParticles();
+
+  window.addEventListener('scroll', updateScrollProgress);
+  // Initialize dark mode based on user preference
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    isDarkMode.value = false;
+    document.body.classList.remove('dark-mode');
+  }
 });
 
 const initParticles = () => {
@@ -170,6 +184,11 @@ onMounted(() => {
     <canvas class="particles"></canvas>
     <div class="last-updated">
       Today's Date: {{ formattedDate }}
+    </div>
+    <div class="dark-mode-toggle">
+      <div class="theme-toggle" @click="toggleDarkMode" :class="{ 'dark-mode-button': isDarkMode, 'light-mode-button': !isDarkMode }">
+        {{ isDarkMode ? '☀️' : '🌙' }}
+      </div>
     </div>
     <div class="main-container">
       <div class="container-one">
@@ -713,5 +732,130 @@ img {
     flex-direction: column;
     align-items: center;
   }
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .main-container {
+  background: #1e1e1e;
+}
+
+.dark-mode .container-one,
+.dark-mode .container-two {
+  background-color: #2c2c2c;
+}
+
+.dark-mode .profile h3,
+.dark-mode .profile p,
+.dark-mode .status-badge,
+.dark-mode .link a,
+.dark-mode .container-two p,
+.dark-mode .achievement-item h3,
+.dark-mode .skill-info span {
+  color: #ffffff;
+}
+
+.dark-mode .tech-button {
+  background: linear-gradient(45deg, #444, #333);
+}
+
+.dark-mode .tech-button:hover {
+  background: linear-gradient(45deg, #333, #444);
+}
+
+.dark-mode .last-updated {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.dark-mode .reading-progress-bar {
+  background-color: #ffffff;
+}
+
+.dark-mode .progress {
+  background: linear-gradient(90deg, #444, #333);
+}
+
+.dark-mode .logos img:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+.dark-mode .tooltip-text {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000000;
+}
+
+.dark-mode .tech-tooltip:hover .tooltip-text {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000000;
+}
+
+.dark-mode .dark-mode-toggle button {
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dark-mode .dark-mode-toggle button:hover {
+  background: #333;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.dark-mode-toggle button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dark-mode-toggle button:hover {
+  background: #2980b9;
+}
+
+.dark-mode-button {
+  background: #444;
+}
+
+.dark-mode-button:hover {
+  background: #333;
+}
+
+.light-mode-button {
+  background: #3498db;
+}
+
+.light-mode-button:hover {
+  background: #2980b9;
+}
+
+.theme-toggle{
+  position: relative;
+    padding: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 100;
 }
 </style>

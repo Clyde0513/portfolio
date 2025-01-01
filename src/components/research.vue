@@ -1,9 +1,12 @@
 <template>
-  <div class="tech-page">
+  <div class="tech-page" :class="theme">
     <canvas class="particles"></canvas>
     <div class="particles-container" ref="particlesContainer"></div>
     <div class="reading-progress-bar" :style="{ width: scrollProgress + '%' }"></div>
     <div class="page-content">
+      <div class="theme-toggle" @click="toggleTheme">
+        {{ theme === 'dark' ? '☀️' : '🌙' }}
+      </div>
       <div class="back-button" @click="goBack">
         ← Go Back
       </div>
@@ -104,6 +107,7 @@ export default {
   name: 'ResearchPage',
   data() {
     return {
+      theme: 'dark',
       isOpen: false,
       isOpen2: false,
       isOpen3: false,
@@ -117,6 +121,7 @@ export default {
     this.initParticles();
     this.initTiltEffect();
     window.addEventListener('scroll', this.handleScroll);
+    this.theme = localStorage.getItem('theme') || 'dark';
     document.querySelectorAll('.paper-section').forEach(section => {
       section.addEventListener('mousemove', (e) => {
         const rect = section.getBoundingClientRect();
@@ -142,6 +147,10 @@ export default {
     },
     togglePaper3() {
       this.isOpen3 = !this.isOpen3
+    },
+    toggleTheme() {
+      this.theme = this.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', this.theme);
     },
     initParticles() {
       const canvas = document.querySelector('.particles');
@@ -259,6 +268,74 @@ export default {
 </script>
 
 <style scoped>
+.tech-page {
+  min-height: 100vh;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tech-page.dark {
+  background-color: #163f4b;
+  color: white;
+}
+
+.tech-page.light {
+  background-color: #e0e8f1;
+  color: #333;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.light .paper-section {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.light .paper-content {
+  background: linear-gradient(
+    145deg,
+    rgba(0, 0, 0, 0.02) 0%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+.light .paper-content p {
+  color: #555;
+}
+
+.light .stat-number {
+  color: #2980b9;
+}
+
+.light .stat-label {
+  color: #555;
+}
+
+.light .back-button {
+  color: #2980b9;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .tech-page {
   background-color: #163f4b;
   min-height: 100vh;
@@ -414,7 +491,7 @@ export default {
 }
 
 .paper-content:hover p {
-  color: #ECEFF1;
+  color: #08090a;
 }
 
 h1, h2, h3 {

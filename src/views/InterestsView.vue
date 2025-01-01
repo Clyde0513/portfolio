@@ -1,7 +1,10 @@
 <template>
-    <div class="interests-container">
+    <div class="interests-container" :class="theme">
         <canvas class="particles"></canvas>
         <div class="content-wrapper">
+            <div class="theme-toggle" @click="toggleTheme">
+                {{ theme === 'dark' ? '☀️' : '🌙' }}
+            </div>
             <div class="back-button" @click="goBack">
                 ← Go Back
             </div>
@@ -47,6 +50,7 @@ import spcn from '../assets/SPCN.png'
 export default {
     data() {
         return {
+            theme: 'dark',
             selectedImage: null,
             interests: [
                 {
@@ -78,6 +82,7 @@ export default {
     },
     mounted() {
         this.initParticles();
+        this.theme = localStorage.getItem('theme') || 'dark';
     },
     methods: {
         goBack() {
@@ -85,6 +90,10 @@ export default {
         },
         openImage(src) {
             this.selectedImage = src;
+        },
+        toggleTheme() {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', this.theme);
         },
         initParticles() {
             const canvas = document.querySelector('.particles');
@@ -154,9 +163,60 @@ export default {
 <style scoped>
 .interests-container {
     min-height: 100vh;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.interests-container.dark {
     background: linear-gradient(135deg, #1a1f3c 0%, #163f4b 100%);
     color: white;
-    position: relative;
+}
+
+.interests-container.light {
+    background: linear-gradient(135deg, #abbed5 0%, #b7d4e0 100%);
+    color: #333;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.light .interest-card {
+    background: rgba(255, 255, 255, 0.2);
+    color: #333;
+}
+
+.light .interest-card h2 {
+    color: #2980b9;
+}
+
+.light .interest-card p {
+    background: linear-gradient(45deg, #2980b9, #27ae60, #2980b9);
+    -webkit-background-clip: text;
+    color: #333;
+}
+
+.light .back-button {
+    color: #2980b9;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .content-wrapper {
