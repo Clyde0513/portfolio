@@ -195,7 +195,7 @@ onMounted(() => {
         <div class="profile">
           <img src="../assets/me.png" alt="my photo">
           <h3>Clyde Villacrusis</h3>
-          <p>UCLA 3rd Year Computer Science Student, in addition to majoring in Linguistics and CS</p>
+          <p>UCLA 3rd Year Computer Science student, in addition to majoring in Linguistics and CS</p>
           <div class="status-badge">
             <span>{{ getRandomEmoji() }} Currently: Developing my Client's Website</span>
           </div>
