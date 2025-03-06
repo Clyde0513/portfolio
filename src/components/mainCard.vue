@@ -244,7 +244,7 @@ onMounted(() => {
           <h1 class='about-me-1'>About me</h1>
           <p>Hello! My name is Clyde Villacrusis and I am majoring in Computer Science and majoring in Linguistics & CS at UCLA as a 3rd year. 
             When given the opportunity, I tend to code stuff such as making my own personal website, e.g. to showcase 
-            many of my projects that I have done in the past.😊
+            many of my projects that I have done in the past.😊😊
             <br />
             <br />
             <b>I am currently interning at UCLA Health to develop an AI application that translates unorganized
