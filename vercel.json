@@ -1,12 +1,7 @@
 {
   "version": 2,
   "framework": "vue",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
+  
   "routes": [
     {
       "handle": "filesystem"
